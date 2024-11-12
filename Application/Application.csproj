@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Features\Cliente\Queries\GetAllClientes\" />
+    <Folder Include="Features\Cliente\Queries\GetClienteById\" />
+    <Folder Include="Features\Menu\Queries\GetAllMenus\" />
+    <Folder Include="Features\Menu\Queries\GetMenuById\" />
+    <Folder Include="Features\Producto\Queries\GetAllProductos\" />
+    <Folder Include="Features\Producto\Queries\GetProductoById\" />
+    <Folder Include="Features\Rol\Queries\GetAllRoles\" />
+    <Folder Include="Features\Rol\Queries\GetRolById\" />
+    <Folder Include="Features\Transaccion\Queries\GetAllTransacciones\" />
+    <Folder Include="Features\Transaccion\Queries\GetTransaccionById\" />
+    <Folder Include="Features\Usuario\Queries\GetAllUsuarios\" />
+    <Folder Include="Features\Usuario\Queries\GetUsuarioById\" />
+    <Folder Include="Features\Venta\Queries\GetAllVentas\" />
+    <Folder Include="Features\Venta\Queries\GetVentaById\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Mappings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,128 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\CursoConectividad\\SistemaVentas\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|d:\\cursoconectividad\\sistemaventas\\persistence\\configuration\\detalleventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\detalleventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|d:\\cursoconectividad\\sistemaventas\\domain\\entities\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|d:\\cursoconectividad\\sistemaventas\\persistence\\configuration\\clienteconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\clienteconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|d:\\cursoconectividad\\sistemaventas\\domain\\entities\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|d:\\cursoconectividad\\sistemaventas\\persistence\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|d:\\cursoconectividad\\sistemaventas\\persistence\\contexts\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\contexts\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 254,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DetalleVentaConfig.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Configuration\\DetalleVentaConfig.cs",
+              "RelativeDocumentMoniker": "Persistence\\Configuration\\DetalleVentaConfig.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Configuration\\DetalleVentaConfig.cs",
+              "RelativeToolTip": "Persistence\\Configuration\\DetalleVentaConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T21:14:17.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServiceExtensions.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\ServiceExtensions.cs",
+              "RelativeDocumentMoniker": "Persistence\\ServiceExtensions.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\ServiceExtensions.cs",
+              "RelativeToolTip": "Persistence\\ServiceExtensions.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T21:07:38.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Contexts\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Persistence\\Contexts\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Contexts\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Persistence\\Contexts\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAqwCkAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T21:02:05.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClienteConfig.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Configuration\\ClienteConfig.cs",
+              "RelativeDocumentMoniker": "Persistence\\Configuration\\ClienteConfig.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Configuration\\ClienteConfig.cs",
+              "RelativeToolTip": "Persistence\\Configuration\\ClienteConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T19:33:19.496Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 209,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Entities\\Cliente.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Cliente.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Entities\\Cliente.cs",
+              "RelativeToolTip": "Domain\\Entities\\Cliente.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAwCIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T19:38:29.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DetalleVenta.cs",
+              "DocumentMoniker": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Entities\\DetalleVenta.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\DetalleVenta.cs",
+              "ToolTip": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Entities\\DetalleVenta.cs",
+              "RelativeToolTip": "Domain\\Entities\\DetalleVenta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T21:16:11.515Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
