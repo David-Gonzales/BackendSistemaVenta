@@ -44,6 +44,7 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.EsActivo)
+                .HasDefaultValue(true)
                 .IsRequired();
 
             builder.Property(p => p.Edad);
@@ -58,7 +59,7 @@ namespace Persistence.Configuration
             builder.HasMany(c => c.Ventas)
                 .WithOne(v => v.Cliente)
                 .HasForeignKey(v => v.IdCliente)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

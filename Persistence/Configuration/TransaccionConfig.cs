@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Configuration
 {
@@ -17,7 +12,7 @@ namespace Persistence.Configuration
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(t => t.Tipo)
+            builder.Property(t => t.TipoTransaccion)
                 .HasConversion<int>() //0:Entrada - 1:Salida
                 .IsRequired();
 
@@ -28,8 +23,8 @@ namespace Persistence.Configuration
                 .HasMaxLength(5)
                 .IsRequired();
 
-            builder.Property(p => p.Estado)
-                .HasMaxLength(5)//Lleno - Vacío
+            builder.Property(p => p.TipoEstado)
+                .HasConversion<string>()//Lleno o Vacío
                 .IsRequired();
 
             builder.Property(p => p.CreatedBy)
@@ -41,8 +36,16 @@ namespace Persistence.Configuration
             //Mapear las relaciones con 1 o más Producto y mapear las relaciones que se tiene con el usuario que lo ingresa (1-1)
 
             //Producto (N - 1)??
+            builder.HasOne(t => t.Producto)
+                .WithMany(p => p.Transacciones)
+                .HasForeignKey(v => v.IdProducto)
+                .OnDelete(DeleteBehavior.Restrict);
 
             //Usuario (N - 1)??
+            builder.HasOne(t => t.Usuario)
+                .WithMany(u => u.Transacciones)
+                .HasForeignKey(v => v.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

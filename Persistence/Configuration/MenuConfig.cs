@@ -30,8 +30,12 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
                 .HasMaxLength(50);
 
-            //Mapear la relación que tiene con los roles
-            //RolMenu (1 - 1)??
+            //MenuRol (1 - N)
+            builder.HasMany(m => m.MenuRoles)
+                .WithOne(mr => mr.Menu)
+                .HasForeignKey(mr => mr.IdMenu)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Configuration
 {
@@ -30,15 +25,17 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
                 .HasMaxLength(50);
 
-            //Relación con la lista de usuarios para este rol y la lista de menus para este Rol
-
             //Usuarios (1 - N)
             builder.HasMany(r => r.Usuarios)
                 .WithOne(u => u.Rol)
                 .HasForeignKey(u => u.IdRol)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //MenuRol (1 - 1)??
+            //MenuRol (1 - N)
+            builder.HasMany(m => m.MenuRoles)
+                .WithOne(mr => mr.Rol)
+                .HasForeignKey(mr => mr.IdRol)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

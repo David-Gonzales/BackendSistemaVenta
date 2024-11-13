@@ -9,6 +9,6 @@ namespace Domain.Entities
         //Relación inversa - Lista de usuarios con este rol
         public ICollection<Usuario>? Usuarios { get; set; }
         //Relación - Lista de Menus con este rol
-        public ICollection<MenuRol>? MenuRols { get; set; }
+        public ICollection<MenuRol>? MenuRoles { get; set; }
     }
 }

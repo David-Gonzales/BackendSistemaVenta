@@ -7,7 +7,7 @@ namespace Domain.Entities
         public string? NumeroVenta { get; set; }
         public required string TipoVenta { get; set; }  
         public required string TipoPago { get; set; }
-        public decimal Total => DetalleVenta?.Sum(detalle => detalle.Total) ?? 0;
+        public decimal Total => DetalleVentas?.Sum(detalle => detalle.Total) ?? 0;
 
         //Relación con el Cliente (1 por cada venta) que realizó la compra
         //FK Cliente
@@ -20,6 +20,6 @@ namespace Domain.Entities
         public Usuario? Usuario { get; set; }
 
         //Relación - Lista de Detalles de venta con esta Venta
-        public ICollection<DetalleVenta> DetalleVenta { get; set;} = new List<DetalleVenta>();
+        public ICollection<DetalleVenta> DetalleVentas { get; set;} = new List<DetalleVenta>();
     }
 }

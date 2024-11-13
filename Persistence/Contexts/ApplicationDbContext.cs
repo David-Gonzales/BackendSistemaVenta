@@ -37,9 +37,25 @@ namespace Persistence.Contexts
             return base.SaveChangesAsync(cancellationToken);
         }
 
+        //permite a EF Core encontrar todas las clases de configuración en el ensamblado actual y aplicarlas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            // Aplicar todas las configuraciones desde el ensamblado
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            // Configuración directa de propiedades en AuditableBaseEntity
+            modelBuilder.Entity<AuditableBaseEntity>(builder =>
+            {
+                builder.Property(e => e.Created)
+                    .HasColumnName("Created")
+                    .IsRequired();
+
+                builder.Property(e => e.LastModify)
+                    .HasColumnName("LastModify")
+                    .IsRequired(false);
+            });
         }
     }
 }

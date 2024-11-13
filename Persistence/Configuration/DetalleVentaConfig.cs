@@ -16,8 +16,8 @@ namespace Persistence.Configuration
                 .HasMaxLength(3)
                 .IsRequired();
 
-            builder.Property(p => p.Estado)
-                .HasMaxLength(5)//Lleno o Vacío
+            builder.Property(p => p.TipoEstado)
+                .HasConversion<string>()//Lleno o Vacío
                 .IsRequired();
 
             builder.Property(p => p.PrecioUnitario)
@@ -28,12 +28,21 @@ namespace Persistence.Configuration
                 .HasMaxLength(7)
                 .IsRequired();
 
-            //Mapeo de Venta y Producto
-            //Venta (N-1)?? Producto (N-1)??
-            //builder.HasMany(dv => dv.Ventas)
-            //    .WithOne(v => v.DetalleVenta)
-            //    .HasForeignKey(v => v.IdDe)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            
+            //Venta (N-1)
+            
+            builder.HasOne(dv => dv.Venta)
+                .WithMany(v => v.DetalleVentas)
+                .HasForeignKey(v => v.IdVenta)
+                .OnDelete(DeleteBehavior.Cascade); //Si borro un detalle de venta se borrará la venta (algo que nunca va a pasar (regla del negocio, las ventas no pueden ser eliminadas o modificado una vez que se hayan creado, por ende tampoco deberían ser eliminadas o modificadas sus detalles de venta) a no ser que sea a través de BD, si eso pasara quiero que se elimine con toda la venta, para que no quede una venta sin su detalle (sería raro una venta sin detalle de venta))
+            
+            //Producto (N-1)
+
+            builder.HasOne(dv => dv.Producto)
+                .WithMany(p => p.DetalleVentas)
+                .HasForeignKey(p => p.IdProducto)
+                .OnDelete(DeleteBehavior.Restrict); //Si borro un detalle de venta NO quiero que se borre el Producto (algo que no va a pasar dado a la regla de negocio). Si llegara a pasar que desde la BD borro (intencional o por error) el Detalle de Venta NO quiero que se borren mis productos (Sería catastrófico que se borrara un producto solo por eliminar 1 detalle de venta).
+            
         }
     }
 }

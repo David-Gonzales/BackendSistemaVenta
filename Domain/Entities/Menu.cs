@@ -9,6 +9,6 @@ namespace Domain.Entities
         public required string Url { get; set; }
 
         //Relación - Lista de Roles con este Menu
-        public ICollection<MenuRol>? MenuRols { get; set; }
+        public ICollection<MenuRol>? MenuRoles { get; set; }
     }
 }

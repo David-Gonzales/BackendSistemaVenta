@@ -33,6 +33,7 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.EsActivo)
+                .HasDefaultValue(true)
                 .IsRequired();
 
             builder.Property(p => p.CreatedBy)
@@ -41,9 +42,11 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
                 .HasMaxLength(50);
 
-            //Mapear las realaciones que se tiene con el rol para ese usuario y la lista de transacciones que haya hecho (1-N) y la lista de ventas que haya hecho (1-N)
-
-            //Rol (N - 1)??
+            //Rol (N - 1)
+            builder.HasOne(u => u.Rol)       // Un Usuario tiene un Rol
+                .WithMany(r => r.Usuarios)   // Un Rol puede estar en múltiples Usuarios
+                .HasForeignKey(u => u.IdRol) // FK en Usuario que apunta al Rol
+                .OnDelete(DeleteBehavior.Restrict); //Si yo borro un usuario, NO quiero que se borren los Roles
 
             //Transaccion (1 - N)
             builder.HasMany(u => u.Transacciones)

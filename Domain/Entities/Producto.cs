@@ -12,6 +12,9 @@ namespace Domain.Entities
         public bool EsActivo { get; set; }
 
         //Relación - Lista de DetallesVenta de cada Producto
-        public ICollection<DetalleVenta>? DetalleVenta { get; set; }
+        public ICollection<DetalleVenta>? DetalleVentas { get; set; }
+
+        //Relación - Lista de Transacciones de cada Producto
+        public ICollection<Transaccion>? Transacciones { get; set; }
     }
 }

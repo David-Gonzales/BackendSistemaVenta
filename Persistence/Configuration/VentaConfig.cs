@@ -35,12 +35,20 @@ namespace Persistence.Configuration
 
             //Mapear las relaciones que tiene con el cliente (N - 1) y Usuario (N - 1) y la lista de Detalles de Venta (1 - N)
 
-            //Cliente (N - 1)??
+            //Cliente (N - 1)
+            builder.HasOne(v => v.Cliente)
+                .WithMany(c => c.Ventas)
+                .HasForeignKey(v => v.IdCliente)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //Usuario (N - 1)??
+            //Usuario (N - 1)
+            builder.HasOne(v => v.Usuario)
+                .WithMany(u => u.Ventas)
+                .HasForeignKey(v => v.IdUsuario)
+                .OnDelete(DeleteBehavior.Restrict);
 
             //DetalleVenta (1 - N)
-            builder.HasMany(v => v.DetalleVenta)
+            builder.HasMany(v => v.DetalleVentas)
                 .WithOne(dv => dv.Venta)
                 .HasForeignKey(dv => dv.IdVenta)
                 .OnDelete(DeleteBehavior.Cascade);

@@ -3,7 +3,7 @@
     public class DetalleVenta
     {
         public required int Cantidad { get; set; }
-        public required string Estado { get; set; }
+        public TipoEstado TipoEstado { get; set; }//Lleno o vacío
         public required decimal PrecioUnitario { get; set; }
         public decimal Total => (Cantidad * PrecioUnitario);
         //FK Venta

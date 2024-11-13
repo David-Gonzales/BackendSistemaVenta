@@ -6,10 +6,10 @@ namespace Domain.Entities
     {
         //FK - Rol
         public int IdRol { get; set; }
-        public Rol? Rol { get; set; }
+        public required Rol Rol { get; set; }
 
         //FK - Menu
         public int IdMenu { get; set; }
-        public Menu? Menu { get; set; }
+        public required Menu Menu { get; set; }
     }
 }

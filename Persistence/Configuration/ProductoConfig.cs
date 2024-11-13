@@ -33,6 +33,7 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.EsActivo)
+                .HasDefaultValue(true)
                 .IsRequired();
 
             builder.Property(p => p.CreatedBy)
@@ -41,11 +42,17 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
                 .HasMaxLength(50);
 
-            //Mapeo de la relación que tiene con DetalleVenta
+            //Mapeo de la relación que tiene con DetalleVenta y Transaccion
             //DetalleVenta (1 - N)
-            builder.HasMany(p => p.DetalleVenta)
+            builder.HasMany(p => p.DetalleVentas)
                 .WithOne(dv => dv.Producto)
                 .HasForeignKey(dv => dv.IdProducto)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //Transaccion (1 - N)
+            builder.HasMany(p => p.Transacciones)
+                .WithOne(t => t.Producto)
+                .HasForeignKey(t => t.IdProducto)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
