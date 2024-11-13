@@ -42,6 +42,20 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapear las realaciones que se tiene con el rol para ese usuario y la lista de transacciones que haya hecho (1-N) y la lista de ventas que haya hecho (1-N)
+
+            //Rol (N - 1)??
+
+            //Transaccion (1 - N)
+            builder.HasMany(u => u.Transacciones)
+                .WithOne(t => t.Usuario)
+                .HasForeignKey(t => t.IdUsuario)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //Venta (1 - N)
+            builder.HasMany(u => u.Ventas)
+                .WithOne(v => v.Usuario)
+                .HasForeignKey(v => v.IdUsuario)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

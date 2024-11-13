@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|c:\\gb\\conectividad\\backendsistemaventa\\persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|c:\\gb\\conectividad\\backendsistemaventa\\domain\\entities\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|c:\\gb\\conectividad\\backendsistemaventa\\persistence\\configuration\\usuarioconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7EAFB7F2-816F-4A14-BEC2-EF17A327ED5B}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\usuarioconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|c:\\gb\\conectividad\\backendsistemaventa\\domain\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75C25CAA-C37D-45D7-B95E-8F1AC9397D24}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -25,7 +13,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 249,
+          "DockedWidth": 246,
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -36,54 +24,9 @@
               "RelativeDocumentMoniker": "Persistence\\Configuration\\VentaConfig.cs",
               "ToolTip": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Configuration\\VentaConfig.cs",
               "RelativeToolTip": "Persistence\\Configuration\\VentaConfig.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAQwCMAAAB5AAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCEAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T03:26:40.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsuarioConfig.cs",
-              "DocumentMoniker": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Configuration\\UsuarioConfig.cs",
-              "RelativeDocumentMoniker": "Persistence\\Configuration\\UsuarioConfig.cs",
-              "ToolTip": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Configuration\\UsuarioConfig.cs",
-              "RelativeToolTip": "Persistence\\Configuration\\UsuarioConfig.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T03:22:13.258Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 249,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Entities\\Usuario.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Usuario.cs",
-              "ToolTip": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Entities\\Usuario.cs",
-              "RelativeToolTip": "Domain\\Entities\\Usuario.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAwAcAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T03:22:01.255Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Venta.cs",
-              "DocumentMoniker": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Entities\\Venta.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Venta.cs",
-              "ToolTip": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Entities\\Venta.cs",
-              "RelativeToolTip": "Domain\\Entities\\Venta.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAA3wAkAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T03:26:26.717Z",
+              "WhenOpened": "2024-11-13T04:27:24.145Z",
               "EditorCaption": ""
             }
           ]

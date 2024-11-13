@@ -29,6 +29,7 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             //Mapeo de Venta y Producto
+            //Venta (N-1)?? Producto (N-1)??
             //builder.HasMany(dv => dv.Ventas)
             //    .WithOne(v => v.DetalleVenta)
             //    .HasForeignKey(v => v.IdDe)

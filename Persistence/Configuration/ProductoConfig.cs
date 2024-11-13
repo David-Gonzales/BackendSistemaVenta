@@ -42,6 +42,11 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapeo de la relación que tiene con DetalleVenta
+            //DetalleVenta (1 - N)
+            builder.HasMany(p => p.DetalleVenta)
+                .WithOne(dv => dv.Producto)
+                .HasForeignKey(dv => dv.IdProducto)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

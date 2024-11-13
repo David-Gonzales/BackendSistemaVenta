@@ -16,7 +16,7 @@ namespace Domain.Entities
         public Rol? Rol { get; set; }
 
         //Relación inversa - Lista de transacciones (entradas y/o salidas) con este usuario
-        public ICollection<Transaccion>? Transaccion { get; set; }
+        public ICollection<Transaccion>? Transacciones { get; set; }
         //Relación - Lista de ventas efectuadas por este usuario
         public ICollection<Venta>? Ventas { get; set; }
     }

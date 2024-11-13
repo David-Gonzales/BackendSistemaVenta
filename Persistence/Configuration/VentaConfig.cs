@@ -34,6 +34,17 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapear las relaciones que tiene con el cliente (N - 1) y Usuario (N - 1) y la lista de Detalles de Venta (1 - N)
+
+            //Cliente (N - 1)??
+
+            //Usuario (N - 1)??
+
+            //DetalleVenta (1 - N)
+            builder.HasMany(v => v.DetalleVenta)
+                .WithOne(dv => dv.Venta)
+                .HasForeignKey(dv => dv.IdVenta)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

@@ -31,6 +31,14 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Relación con la lista de usuarios para este rol y la lista de menus para este Rol
+
+            //Usuarios (1 - N)
+            builder.HasMany(r => r.Usuarios)
+                .WithOne(u => u.Rol)
+                .HasForeignKey(u => u.IdRol)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //MenuRol (1 - 1)??
         }
     }
 }

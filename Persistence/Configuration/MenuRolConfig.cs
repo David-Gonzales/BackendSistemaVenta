@@ -24,6 +24,7 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapear relaciones Menu y Rol
+            //Menu (N - 1) y Rol (N - 1)
         }
     }
 }

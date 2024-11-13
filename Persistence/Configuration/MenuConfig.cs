@@ -31,6 +31,7 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapear la relación que tiene con los roles
+            //RolMenu (1 - 1)??
         }
     }
 }

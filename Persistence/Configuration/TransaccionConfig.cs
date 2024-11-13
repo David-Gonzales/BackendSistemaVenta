@@ -39,6 +39,10 @@ namespace Persistence.Configuration
                 .HasMaxLength(50);
 
             //Mapear las relaciones con 1 o más Producto y mapear las relaciones que se tiene con el usuario que lo ingresa (1-1)
+
+            //Producto (N - 1)??
+
+            //Usuario (N - 1)??
         }
     }
 }

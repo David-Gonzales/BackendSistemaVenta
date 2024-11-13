@@ -54,10 +54,11 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
                 .HasMaxLength(50);
 
+            //Relación de 1 - N
             builder.HasMany(c => c.Ventas)
                 .WithOne(v => v.Cliente)
                 .HasForeignKey(v => v.IdCliente)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
