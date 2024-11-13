@@ -4,7 +4,7 @@ namespace Domain.Entities
 {
     public class Rol : AuditableBaseEntity
     {
-        public string? Nombre { get; set; }
+        public required string Nombre { get; set; }
 
         //Relación inversa - Lista de usuarios con este rol
         public ICollection<Usuario>? Usuarios { get; set; }

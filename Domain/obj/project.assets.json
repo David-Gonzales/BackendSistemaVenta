@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\jsdvd\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Domain.csproj",
-      "packagesPath": "C:\\Users\\jsdvd\\.nuget\\packages\\",
-      "outputPath": "D:\\CursoConectividad\\SistemaVentas\\Domain\\obj\\",
+      "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jsdvd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

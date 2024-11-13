@@ -4963,19 +4963,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jsdvd\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CursoConectividad\\SistemaVentas\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "C:\\GB\\Conectividad\\BackendSistemaVenta\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "D:\\CursoConectividad\\SistemaVentas\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\jsdvd\\.nuget\\packages\\",
-      "outputPath": "D:\\CursoConectividad\\SistemaVentas\\WebAPI\\obj\\",
+      "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jsdvd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4990,14 +4990,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj": {
-              "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj"
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj"
             },
-            "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Persistence.csproj": {
-              "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Persistence.csproj"
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Persistence.csproj"
             },
-            "D:\\CursoConectividad\\SistemaVentas\\Shared\\Shared.csproj": {
-              "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Shared\\Shared.csproj"
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj"
             }
           }
         }
@@ -5051,7 +5051,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

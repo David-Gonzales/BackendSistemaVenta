@@ -11,6 +11,28 @@ namespace Persistence.Configuration
             builder.ToTable("DetalleVenta");
 
             builder.HasKey(p => new { p.IdVenta, p.IdProducto });
+
+            builder.Property(p => p.Cantidad)
+                .HasMaxLength(3)
+                .IsRequired();
+
+            builder.Property(p => p.Estado)
+                .HasMaxLength(5)//Lleno o Vacío
+                .IsRequired();
+
+            builder.Property(p => p.PrecioUnitario)
+                .HasMaxLength(7)
+                .IsRequired();
+
+            builder.Property(p => p.Total)
+                .HasMaxLength(7)
+                .IsRequired();
+
+            //Mapeo de Venta y Producto
+            //builder.HasMany(dv => dv.Ventas)
+            //    .WithOne(v => v.DetalleVenta)
+            //    .HasForeignKey(v => v.IdDe)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

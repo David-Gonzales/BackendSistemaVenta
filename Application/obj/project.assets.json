@@ -527,19 +527,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jsdvd\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj",
-      "packagesPath": "C:\\Users\\jsdvd\\.nuget\\packages\\",
-      "outputPath": "D:\\CursoConectividad\\SistemaVentas\\Application\\obj\\",
+      "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jsdvd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -554,8 +554,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\CursoConectividad\\SistemaVentas\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Domain\\Domain.csproj"
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Domain\\Domain.csproj"
             }
           }
         }
@@ -616,7 +616,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

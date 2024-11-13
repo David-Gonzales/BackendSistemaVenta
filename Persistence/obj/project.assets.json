@@ -3196,19 +3196,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jsdvd\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Persistence.csproj",
+      "projectUniqueName": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Persistence.csproj",
       "projectName": "Persistence",
-      "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\Persistence.csproj",
-      "packagesPath": "C:\\Users\\jsdvd\\.nuget\\packages\\",
-      "outputPath": "D:\\CursoConectividad\\SistemaVentas\\Persistence\\obj\\",
+      "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\Persistence.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jsdvd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3223,8 +3223,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj": {
-              "projectPath": "D:\\CursoConectividad\\SistemaVentas\\Application\\Application.csproj"
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj"
             }
           }
         }
@@ -3277,7 +3277,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
