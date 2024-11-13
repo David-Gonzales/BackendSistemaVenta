@@ -5,7 +5,7 @@
         public required int Cantidad { get; set; }
         public TipoEstado TipoEstado { get; set; }//Lleno o vacío
         public required decimal PrecioUnitario { get; set; }
-        public decimal Total => (Cantidad * PrecioUnitario);
+        public decimal Total { get; set; }
         //FK Venta
         public int IdVenta { get; set; }
         public Venta? Venta { get; set; }

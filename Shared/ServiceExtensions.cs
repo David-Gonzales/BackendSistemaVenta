@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shared.Services;
 
 namespace Shared
 {
@@ -8,7 +9,7 @@ namespace Shared
     {
         public static void AgregarSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IDateTimeServices, IDateTimeServices>();
+            services.AddTransient<IDateTimeServices, DateTimeServices>();
         }
     }
 }

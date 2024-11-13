@@ -1,0 +1,9 @@
+# User-specific files
+.vs/
+.vscode/
+**/bin/
+**/obj/
+*.user
+*.userosscache
+*.suo
+*.userprefs

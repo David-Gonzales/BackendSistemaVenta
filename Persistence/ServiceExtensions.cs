@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
-using Persistence.Repository;
+using Shared.Services;
 
 namespace Persistence
 {
@@ -20,7 +20,7 @@ namespace Persistence
 
             #region Repositorios
             //Matriculamos el patrón repositorio
-            services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            services.AddTransient<IDateTimeServices, DateTimeServices>();
             #endregion
         }
     }

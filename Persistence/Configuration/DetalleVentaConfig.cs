@@ -21,11 +21,11 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.PrecioUnitario)
-                .HasMaxLength(7)
+                .HasColumnType("decimal(7,2)")
                 .IsRequired();
 
             builder.Property(p => p.Total)
-                .HasMaxLength(7)
+                .HasColumnType("decimal(7,2)")
                 .IsRequired();
 
             

@@ -29,7 +29,7 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.Precio)
-                .HasMaxLength (7)
+                .HasColumnType("decimal(7,2)")
                 .IsRequired();
 
             builder.Property(p => p.EsActivo)

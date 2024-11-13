@@ -1189,6 +1189,20 @@
         "runtime": {
           "bin/placeholder/Domain.dll": {}
         }
+      },
+      "Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Application": "1.0.0",
+          "Microsoft.Extensions.Options.ConfigurationExtensions": "8.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.dll": {}
+        }
       }
     }
   },
@@ -3184,6 +3198,11 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/Shared.csproj",
+      "msbuildProject": "../Shared/Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3192,7 +3211,8 @@
       "Ardalis.Specification.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.10",
-      "Microsoft.Extensions.Options.ConfigurationExtensions >= 8.0.0"
+      "Microsoft.Extensions.Options.ConfigurationExtensions >= 8.0.0",
+      "Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3225,6 +3245,9 @@
           "projectReferences": {
             "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj": {
               "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj"
+            },
+            "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj": {
+              "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj"
             }
           }
         }

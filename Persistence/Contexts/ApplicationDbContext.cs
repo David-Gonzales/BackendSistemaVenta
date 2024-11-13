@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Common;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -16,8 +17,18 @@ namespace Persistence.Contexts
         }
 
         //DbSets
-        //Por ejemplo:
-        //public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<DetalleVenta> DetalleVenta { get; set; }
+        public DbSet<Menu> Menu { get; set; }
+        public DbSet<MenuRol> MenuRol { get; set; }
+        public DbSet<NumeroVenta> NumeroVenta { get; set; }
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<Rol> Rol { get; set; }
+        public DbSet<Transaccion> Transaccion { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Venta> Venta { get; set; }
+        
+        
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -34,28 +45,23 @@ namespace Persistence.Contexts
                         break;
                 }
             }
+
+            foreach (var entry in ChangeTracker.Entries<DetalleVenta>())
+            {
+                // Si es una nueva venta, calculamos el Total
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.Total = entry.Entity.Cantidad * entry.Entity.PrecioUnitario;
+                }
+            }
             return base.SaveChangesAsync(cancellationToken);
         }
 
         //permite a EF Core encontrar todas las clases de configuración en el ensamblado actual y aplicarlas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             // Aplicar todas las configuraciones desde el ensamblado
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-            // Configuración directa de propiedades en AuditableBaseEntity
-            modelBuilder.Entity<AuditableBaseEntity>(builder =>
-            {
-                builder.Property(e => e.Created)
-                    .HasColumnName("Created")
-                    .IsRequired();
-
-                builder.Property(e => e.LastModify)
-                    .HasColumnName("LastModify")
-                    .IsRequired(false);
-            });
         }
     }
 }

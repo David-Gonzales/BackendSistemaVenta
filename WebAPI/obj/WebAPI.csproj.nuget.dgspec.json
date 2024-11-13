@@ -183,6 +183,9 @@
             "projectReferences": {
               "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj": {
                 "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Application\\Application.csproj"
+              },
+              "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\GB\\Conectividad\\BackendSistemaVenta\\Shared\\Shared.csproj"
               }
             }
           }
