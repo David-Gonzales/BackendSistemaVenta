@@ -17,7 +17,7 @@ namespace Persistence.Contexts
         }
 
         //DbSets
-        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
         public DbSet<DetalleVenta> DetalleVenta { get; set; }
         public DbSet<Menu> Menu { get; set; }
         public DbSet<MenuRol> MenuRol { get; set; }

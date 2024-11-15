@@ -8,22 +8,21 @@
 
   <ItemGroup>
     <Folder Include="DTOs\" />
-    <Folder Include="Features\Cliente\Queries\GetAllClientes\" />
-    <Folder Include="Features\Cliente\Queries\GetClienteById\" />
-    <Folder Include="Features\Menu\Queries\GetAllMenus\" />
-    <Folder Include="Features\Menu\Queries\GetMenuById\" />
-    <Folder Include="Features\Producto\Queries\GetAllProductos\" />
-    <Folder Include="Features\Producto\Queries\GetProductoById\" />
-    <Folder Include="Features\Rol\Queries\GetAllRoles\" />
-    <Folder Include="Features\Rol\Queries\GetRolById\" />
-    <Folder Include="Features\Transaccion\Queries\GetAllTransacciones\" />
-    <Folder Include="Features\Transaccion\Queries\GetTransaccionById\" />
-    <Folder Include="Features\Usuario\Queries\GetAllUsuarios\" />
-    <Folder Include="Features\Usuario\Queries\GetUsuarioById\" />
-    <Folder Include="Features\Venta\Queries\GetAllVentas\" />
-    <Folder Include="Features\Venta\Queries\GetVentaById\" />
+    <Folder Include="Features\Clientes\Queries\GetAllClientes\" />
+    <Folder Include="Features\Clientes\Queries\GetClienteById\" />
+    <Folder Include="Features\Menus\Queries\GetAllMenus\" />
+    <Folder Include="Features\Menus\Queries\GetMenuById\" />
+    <Folder Include="Features\Productos\Queries\GetAllProductos\" />
+    <Folder Include="Features\Productos\Queries\GetProductoById\" />
+    <Folder Include="Features\Roles\Queries\GetAllRoles\" />
+    <Folder Include="Features\Roles\Queries\GetRolById\" />
+    <Folder Include="Features\Transacciones\Queries\GetAllTransacciones\" />
+    <Folder Include="Features\Transacciones\Queries\GetTransaccionById\" />
+    <Folder Include="Features\Usuarios\Queries\GetAllUsuarios\" />
+    <Folder Include="Features\Usuarios\Queries\GetUsuarioById\" />
+    <Folder Include="Features\Ventas\Queries\GetAllVentas\" />
+    <Folder Include="Features\Ventas\Queries\GetVentaById\" />
     <Folder Include="Filters\" />
-    <Folder Include="Mappings\" />
   </ItemGroup>
 
   <ItemGroup>

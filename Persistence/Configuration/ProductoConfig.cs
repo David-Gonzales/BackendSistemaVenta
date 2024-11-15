@@ -17,7 +17,6 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.Capacidad)
-                .HasMaxLength(5)
                 .IsRequired();
 
             builder.Property(p => p.Unidad)
@@ -25,7 +24,6 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(p => p.Stock)
-                .HasMaxLength(5)
                 .IsRequired();
 
             builder.Property(p => p.Precio)

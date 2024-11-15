@@ -13,14 +13,13 @@ namespace Persistence.Configuration
             builder.HasKey(p => p.Id);
 
             builder.Property(t => t.TipoTransaccion)
-                .HasConversion<int>() //0:Entrada - 1:Salida
+                .HasConversion<string>() //Entrada - Salida
                 .IsRequired();
 
             builder.Property(p => p.Fecha)
                 .IsRequired();
 
             builder.Property(p => p.Cantidad)
-                .HasMaxLength(5)
                 .IsRequired();
 
             builder.Property(p => p.TipoEstado)
