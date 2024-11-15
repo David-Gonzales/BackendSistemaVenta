@@ -1,4 +1,6 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -16,9 +18,20 @@ namespace Application.Features.Transacciones.Commands.CreateTransaccionCommand
 
     public class CreateTransaccionCommandHandler : IRequestHandler<CreateTransaccionCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(CreateTransaccionCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Transaccion> _repositoryAsync;
+        private readonly IMapper _mapper;
+        public CreateTransaccionCommandHandler(IRepositoryAsync<Transaccion> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+                
+        public async Task<Response<int>> Handle(CreateTransaccionCommand request, CancellationToken cancellationToken)
+        {
+            var nuevaTransaccion = _mapper.Map<Transaccion>(request);
+            var data = await _repositoryAsync.AddAsync(nuevaTransaccion);
+
+            return new Response<int>(data.Id);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Usuarios.Commands.CreateUsuarioCommand
@@ -15,9 +18,21 @@ namespace Application.Features.Usuarios.Commands.CreateUsuarioCommand
     }
     public class CreateUsuarioCommandHandler : IRequestHandler<CreateUsuarioCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Usuario> _repositoryAsync;
+        private readonly IMapper _mapper;
+
+        public CreateUsuarioCommandHandler(IRepositoryAsync<Usuario> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+
+        public async Task<Response<int>> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
+        {
+            var nuevoUsuario = _mapper.Map<Usuario>(request);
+            var data = await _repositoryAsync.AddAsync(nuevoUsuario);
+
+            return new Response<int>(data.Id);
         }
     }
 }

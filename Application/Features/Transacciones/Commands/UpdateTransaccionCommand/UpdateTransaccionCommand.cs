@@ -1,4 +1,6 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -17,9 +19,36 @@ namespace Application.Features.Transacciones.Commands.UpdateTransaccionCommand
 
     public class UpdateTransaccionCommandHandler : IRequestHandler<UpdateTransaccionCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(UpdateTransaccionCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Transaccion> _repositoryAsync;
+        private readonly IMapper _mapper;
+
+        public UpdateTransaccionCommandHandler(IRepositoryAsync<Transaccion> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+        
+        public async Task<Response<int>> Handle(UpdateTransaccionCommand request, CancellationToken cancellationToken)
+        {
+            var transaccion = await _repositoryAsync.GetByIdAsync(request.Id);
+            
+            if (transaccion != null) 
+            {
+                transaccion.TipoTransaccion = request.TipoTransaccion;
+                transaccion.Fecha = request.Fecha;
+                transaccion.Cantidad = request.Cantidad;
+                transaccion.TipoEstado = request.TipoEstado;
+                transaccion.IdProducto = request.IdProducto;
+                transaccion.IdUsuario = request.IdUsuario;
+
+                await _repositoryAsync.UpdateAsync(transaccion);
+
+                return new Response<int>(transaccion.Id);
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Transacción no encontrada con el id {request.Id}");
+            }
         }
     }
 }

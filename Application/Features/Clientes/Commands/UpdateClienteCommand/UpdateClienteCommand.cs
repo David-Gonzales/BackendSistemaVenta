@@ -33,33 +33,33 @@ namespace Application.Features.Clientes.Commands.UpdateClienteCommand
         
         public async Task<Response<int>> Handle(UpdateClienteCommand request, CancellationToken cancellationToken)
         {
-            var registro = await _repositoryAsync.GetByIdAsync(request.Id);
+            var cliente = await _repositoryAsync.GetByIdAsync(request.Id);
 
-            if (registro != null)
+            if (cliente != null)
             {
-                registro.Nombres = request.Nombres;
-                registro.Apellidos = request.Apellidos;
-                registro.TipoDocumento = request.TipoDocumento;
-                registro.NumeroDocumento = request.NumeroDocumento;
-                registro.Correo = request.Correo;
-                registro.Ciudad = request.Ciudad;
-                registro.Telefono = request.Telefono;
-                registro.FechaNacimiento = request.FechaNacimiento;
+                cliente.Nombres = request.Nombres;
+                cliente.Apellidos = request.Apellidos;
+                cliente.TipoDocumento = request.TipoDocumento;
+                cliente.NumeroDocumento = request.NumeroDocumento;
+                cliente.Correo = request.Correo;
+                cliente.Ciudad = request.Ciudad;
+                cliente.Telefono = request.Telefono;
+                cliente.FechaNacimiento = request.FechaNacimiento;
 
                 // Calcula la Edad si FechaNacimiento ha cambiado
-                registro.Edad = DateTime.Now.Year - request.FechaNacimiento.Year -
+                cliente.Edad = DateTime.Now.Year - request.FechaNacimiento.Year -
                                 (DateTime.Now < request.FechaNacimiento.AddYears(DateTime.Now.Year - request.FechaNacimiento.Year) ? 1 : 0);
 
 
-                registro.EsActivo = request.EsActivo;
+                cliente.EsActivo = request.EsActivo;
 
-                await _repositoryAsync.UpdateAsync(registro);
+                await _repositoryAsync.UpdateAsync(cliente);
 
-                return new Response<int>(registro.Id);
+                return new Response<int>(cliente.Id);
             }
             else
             {
-                throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
+                throw new KeyNotFoundException($"Cliente no encontrado con el id {request.Id}");
             }
         }
     }

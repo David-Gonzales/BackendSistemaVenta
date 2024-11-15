@@ -1,4 +1,7 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Usuarios.Commands.DeleteUsuarioCommand
@@ -10,9 +13,26 @@ namespace Application.Features.Usuarios.Commands.DeleteUsuarioCommand
 
     public class DeleteUsuarioCommandHandler : IRequestHandler<DeleteUsuarioCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Usuario> _repositoryAsync;
+        private readonly IMapper _mapper;
+
+        public DeleteUsuarioCommandHandler(IRepositoryAsync<Usuario> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+        public async Task<Response<int>> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
+        {
+            var usuario = await _repositoryAsync.GetByIdAsync(request.Id);
+            if (usuario != null)
+            {
+                await _repositoryAsync.DeleteAsync(usuario);
+                return new Response<int>(usuario.Id);
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Usuario no encontrado con el id {request.Id}");
+            }
         }
     }
 }

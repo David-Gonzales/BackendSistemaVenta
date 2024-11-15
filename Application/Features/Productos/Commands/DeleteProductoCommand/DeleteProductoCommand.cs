@@ -1,4 +1,7 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Productos.Commands.DeleteProductoCommand
@@ -9,9 +12,27 @@ namespace Application.Features.Productos.Commands.DeleteProductoCommand
     }
     public class DeleteProductoCommandHandler : IRequestHandler<DeleteProductoCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(DeleteProductoCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Producto> _repositoryAsync;
+        private readonly Mapper _mapper;
+
+        public DeleteProductoCommandHandler(IRepositoryAsync<Producto> repositoryAsync, Mapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+
+        public async Task<Response<int>> Handle(DeleteProductoCommand request, CancellationToken cancellationToken)
+        {
+            var producto = await _repositoryAsync.GetByIdAsync(request.Id);
+            if(producto != null)
+            {
+                await _repositoryAsync.DeleteAsync(producto);
+                return new Response<int>(producto.Id);
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Producto no encontrado con el id {request.Id}");
+            }
         }
     }
 }

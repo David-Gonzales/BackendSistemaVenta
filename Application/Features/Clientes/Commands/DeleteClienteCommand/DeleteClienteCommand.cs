@@ -23,17 +23,17 @@ namespace Application.Features.Clientes.Commands.DeleteClienteCommand
         }
         public async Task<Response<int>> Handle(DeleteClienteCommand request, CancellationToken cancellationToken)
         {
-            var registro = await _repositoryAsync.GetByIdAsync(request.Id);
+            var cliente = await _repositoryAsync.GetByIdAsync(request.Id);
 
-            if (registro != null)
+            if (cliente != null)
             {
-                await _repositoryAsync.DeleteAsync(registro);
+                await _repositoryAsync.DeleteAsync(cliente);
 
-                return new Response<int>(registro.Id);
+                return new Response<int>(cliente.Id);
             }
             else
             {
-                throw new KeyNotFoundException($"Registro no encontrado con el id {request.Id}");
+                throw new KeyNotFoundException($"Cliente no encontrado con el id {request.Id}");
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Productos.Commands.CreateProductoCommand
@@ -15,9 +18,21 @@ namespace Application.Features.Productos.Commands.CreateProductoCommand
 
     public class CreateProductoCommandHandler : IRequestHandler<CreateProductoCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(CreateProductoCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Producto> _repositoryAsync;
+        private readonly IMapper _mapper;
+
+        public CreateProductoCommandHandler(IRepositoryAsync<Producto> repositoryAsync, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _mapper = mapper;
+        }
+
+        public async Task<Response<int>> Handle(CreateProductoCommand request, CancellationToken cancellationToken)
+        {
+            var nuevoProducto = _mapper.Map<Producto>(request);
+            var data = await _repositoryAsync.AddAsync(nuevoProducto);
+
+            return new Response<int>(data.Id);
         }
     }
 }

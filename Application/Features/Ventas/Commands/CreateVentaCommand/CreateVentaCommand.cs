@@ -1,4 +1,6 @@
-﻿using Application.Wrappers;
+﻿using Application.Interfaces;
+using Application.Wrappers;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -17,9 +19,50 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
 
     public class CreateVentaCommandHandler : IRequestHandler<CreateVentaCommand, Response<int>>
     {
-        public Task<Response<int>> Handle(CreateVentaCommand request, CancellationToken cancellationToken)
+        private readonly IRepositoryAsync<Venta> _repositoryAsync;
+        private readonly IRepositoryAsync<Producto> _productoRepositoryAsync;
+        private readonly IMapper _mapper;
+
+        public CreateVentaCommandHandler(IRepositoryAsync<Venta> repositoryAsync, IMapper mapper, IRepositoryAsync<Producto> productoRepositoryAsync)
         {
-            throw new NotImplementedException();
+            _repositoryAsync = repositoryAsync;
+            _productoRepositoryAsync = productoRepositoryAsync;
+            _mapper = mapper;
+        }
+        public async Task<Response<int>> Handle(CreateVentaCommand request, CancellationToken cancellationToken)
+        {
+            var nuevaVenta = _mapper.Map<Venta>(request);
+            decimal totalVenta = 0;
+
+            foreach (var detalle in request.DetalleVenta)
+            {
+
+                if (detalle.IdProducto == 0)
+                {
+                    throw new ArgumentException($"Producto no encontrado con el id {detalle.IdProducto}");
+                }
+
+                var producto = await _productoRepositoryAsync.GetByIdAsync(detalle.IdProducto);
+
+                if (producto != null)
+                {
+                    detalle.PrecioUnitario = producto.Precio;
+                    detalle.Total = detalle.Cantidad * detalle.PrecioUnitario;
+                    totalVenta += detalle.Total;
+                }
+                else
+                {
+                    throw new KeyNotFoundException($"Producto no encontrado con el id {detalle.IdProducto}");
+                }
+            }
+
+            nuevaVenta.Total = totalVenta;
+
+            nuevaVenta.DetalleVentas = request.DetalleVenta;
+
+            var data = await _repositoryAsync.AddAsync(nuevaVenta);
+
+            return new Response<int>(data.Id);
         }
     }
 }
