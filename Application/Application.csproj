@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="Features\Clientes\Queries\GetAllClientes\" />
-    <Folder Include="Features\Clientes\Queries\GetClienteById\" />
     <Folder Include="Features\Menus\Queries\GetAllMenus\" />
-    <Folder Include="Features\Menus\Queries\GetMenuById\" />
     <Folder Include="Features\Productos\Queries\GetAllProductos\" />
-    <Folder Include="Features\Productos\Queries\GetProductoById\" />
     <Folder Include="Features\Roles\Queries\GetAllRoles\" />
     <Folder Include="Features\Roles\Queries\GetRolById\" />
     <Folder Include="Features\Transacciones\Queries\GetAllTransacciones\" />

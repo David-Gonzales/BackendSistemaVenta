@@ -1,4 +1,5 @@
-﻿using Application.Features.Clientes.Commands.CreateClienteCommand;
+﻿using Application.DTOs;
+using Application.Features.Clientes.Commands.CreateClienteCommand;
 using Application.Features.Clientes.Commands.DeleteClienteCommand;
 using Application.Features.Clientes.Commands.UpdateClienteCommand;
 using Application.Features.Productos.Commands.CreateProductoCommand;
@@ -44,7 +45,7 @@ namespace Application.Mappings
             #endregion
 
             #region DTOs
-            //CreateMap<Cliente>
+            CreateMap<Cliente, ClienteDto>();
             #endregion 
         }
     }
