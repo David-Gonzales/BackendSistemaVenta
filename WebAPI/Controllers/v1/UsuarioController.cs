@@ -1,23 +1,23 @@
-﻿using Application.Features.Clientes.Commands.CreateClienteCommand;
-using Application.Features.Clientes.Commands.DeleteClienteCommand;
-using Application.Features.Clientes.Commands.UpdateClienteCommand;
+﻿using Application.Features.Usuarios.Commands.CreateUsuarioCommand;
+using Application.Features.Usuarios.Commands.DeleteUsuarioCommand;
+using Application.Features.Usuarios.Commands.UpdateUsuarioCommand;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.v1
 {
     [ApiVersion("1.0")]
-    public class ClienteController : BaseApiController
+    public class UsuarioController : BaseApiController
     {
         //POST api/<controller>
         [HttpPost]
-        public async Task<IActionResult> Post(CreateClienteCommand command)
+        public async Task<IActionResult> Post(CreateUsuarioCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         //PUT api/<controller>/id
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UpdateClienteCommand command)
+        public async Task<IActionResult> Put(int id, UpdateUsuarioCommand command)
         {
             if (id != command.Id)
                 return BadRequest();
@@ -28,7 +28,7 @@ namespace WebAPI.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok(await Mediator.Send(new DeleteClienteCommand { Id = id }));
+            return Ok(await Mediator.Send(new DeleteUsuarioCommand { Id = id }));
         }
     }
 }

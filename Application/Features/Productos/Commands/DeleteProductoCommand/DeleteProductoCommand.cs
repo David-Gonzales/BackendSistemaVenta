@@ -13,9 +13,9 @@ namespace Application.Features.Productos.Commands.DeleteProductoCommand
     public class DeleteProductoCommandHandler : IRequestHandler<DeleteProductoCommand, Response<int>>
     {
         private readonly IRepositoryAsync<Producto> _repositoryAsync;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public DeleteProductoCommandHandler(IRepositoryAsync<Producto> repositoryAsync, Mapper mapper)
+        public DeleteProductoCommandHandler(IRepositoryAsync<Producto> repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;
             _mapper = mapper;
