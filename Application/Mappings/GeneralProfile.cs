@@ -46,6 +46,10 @@ namespace Application.Mappings
 
             #region DTOs
             CreateMap<Cliente, ClienteDto>();
+            CreateMap<Menu, MenuDto>();
+            CreateMap<Producto, ProductoDto>();
+            CreateMap<Rol, RolDto>();
+            CreateMap<Transaccion, TransaccionDto>();
             #endregion 
         }
     }
