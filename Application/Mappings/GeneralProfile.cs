@@ -50,6 +50,7 @@ namespace Application.Mappings
             CreateMap<Producto, ProductoDto>();
             CreateMap<Rol, RolDto>();
             CreateMap<Transaccion, TransaccionDto>();
+            CreateMap<Usuario, UsuarioDto>();
             #endregion 
         }
     }
