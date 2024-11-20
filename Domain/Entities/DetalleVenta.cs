@@ -2,6 +2,7 @@
 {
     public class DetalleVenta
     {
+        public int Id { get; set; }
         public required int Cantidad { get; set; }
         public TipoEstado TipoEstado { get; set; }//Lleno o vacío
         public required decimal PrecioUnitario { get; set; }

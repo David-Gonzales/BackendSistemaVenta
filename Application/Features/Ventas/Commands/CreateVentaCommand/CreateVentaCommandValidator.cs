@@ -1,10 +1,5 @@
 ﻿using Domain.Entities;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Ventas.Commands.CreateVentaCommand
 {
@@ -32,12 +27,12 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
             RuleFor(x => x.IdUsuario)
                 .GreaterThan(0).WithMessage("{PropertyName} debe ser válido.");
 
-            RuleForEach(x => x.DetalleVenta)
+            RuleForEach(x => x.DetalleVentas)
                 .SetValidator(new DetalleVentaValidator()); // Validar cada detalle
 
         }
 
-        public class DetalleVentaValidator : AbstractValidator<DetalleVenta>
+        public class DetalleVentaValidator : AbstractValidator<CreateDetalleVentaCommand>
         {
             public DetalleVentaValidator()
             {

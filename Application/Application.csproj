@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Ventas\Queries\GetAllVentas\" />
     <Folder Include="Features\Ventas\Queries\GetVentaById\" />
     <Folder Include="Filters\" />
   </ItemGroup>

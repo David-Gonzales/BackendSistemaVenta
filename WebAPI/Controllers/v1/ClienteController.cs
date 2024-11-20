@@ -12,6 +12,7 @@ namespace WebAPI.Controllers.v1
     {
         //GET api/<controller>
         [HttpGet()]
+        [Route("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllClientesParameters filter)
         {
             return Ok(await Mediator.Send(new GetAllClientesQuery 
@@ -23,8 +24,8 @@ namespace WebAPI.Controllers.v1
         }
 
         //GET api/<controller>/id
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("Cliente")]
+        public async Task<IActionResult> Get([FromQuery] int id)
         {
             return Ok(await Mediator.Send(new GetClienteByIdQuery { Id = id }));
         }

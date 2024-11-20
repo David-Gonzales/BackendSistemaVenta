@@ -10,7 +10,7 @@ namespace Persistence.Configuration
         {
             builder.ToTable("DetalleVenta");
 
-            builder.HasKey(p => new { p.IdVenta, p.IdProducto });
+            builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Cantidad)
                 .HasMaxLength(3)

@@ -42,6 +42,9 @@ namespace Application.Mappings
 
             //Mapeo la Venta pero ignora los detalles en el mapeo inicial
             CreateMap<CreateVentaCommand, Venta>().ForMember(dest => dest.DetalleVentas, opt => opt.Ignore());
+
+            CreateMap<CreateDetalleVentaCommand, DetalleVenta>()
+            .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.Cantidad * src.PrecioUnitario)); // Si quieres calcular Total
             #endregion
 
             #region DTOs

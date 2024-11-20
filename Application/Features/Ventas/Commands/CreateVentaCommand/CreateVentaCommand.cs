@@ -8,13 +8,13 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
 {
     public class CreateVentaCommand : IRequest<Response<int>>
     {
-        public string? NumeroVenta { get; set; }
+        public required string NumeroVenta { get; set; }
         public required string TipoVenta { get; set; }
         public required string TipoPago { get; set; }
-        public decimal Total { get; set; }
+        //public decimal Total { get; set; }
         public int IdCliente { get; set; }
         public int IdUsuario { get; set; }
-        public ICollection<DetalleVenta> DetalleVenta { get; set; }
+        public ICollection<CreateDetalleVentaCommand> DetalleVentas { get; set; }
     }
 
     public class CreateVentaCommandHandler : IRequestHandler<CreateVentaCommand, Response<int>>
@@ -34,7 +34,7 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
             var nuevaVenta = _mapper.Map<Venta>(request);
             decimal totalVenta = 0;
 
-            foreach (var detalle in request.DetalleVenta)
+            foreach (var detalle in request.DetalleVentas)
             {
 
                 if (detalle.IdProducto == 0)
@@ -58,7 +58,7 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
 
             nuevaVenta.Total = totalVenta;
 
-            nuevaVenta.DetalleVentas = request.DetalleVenta;
+            nuevaVenta.DetalleVentas = _mapper.Map<ICollection<DetalleVenta>>(request.DetalleVentas);
 
             var data = await _repositoryAsync.AddAsync(nuevaVenta);
 
