@@ -24,7 +24,7 @@ namespace WebAPI.Controllers.v1
         }
 
         //GET api/<controller>/id
-        [HttpGet("Cliente")]
+        [HttpGet("Obtener")]
         public async Task<IActionResult> Get([FromQuery] int id)
         {
             return Ok(await Mediator.Send(new GetClienteByIdQuery { Id = id }));
@@ -32,13 +32,14 @@ namespace WebAPI.Controllers.v1
 
         //POST api/<controller>
         [HttpPost]
+        [Route("Guardar")]
         public async Task<IActionResult> Post(CreateClienteCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         //PUT api/<controller>/id
-        [HttpPut("{id}")]
+        [HttpPut("Editar")]
         public async Task<IActionResult> Put(int id, UpdateClienteCommand command)
         {
             if (id != command.Id)
@@ -47,7 +48,7 @@ namespace WebAPI.Controllers.v1
         }
 
         //DELETE api/<controller>
-        [HttpDelete("{id}")]
+        [HttpDelete("Eliminar")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await Mediator.Send(new DeleteClienteCommand { Id = id }));
