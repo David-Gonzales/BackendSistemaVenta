@@ -11,7 +11,7 @@ namespace WebAPI.Controllers.v1
     {
 
         //GET api/<controller>
-        [HttpGet()]
+        [HttpGet("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllVentasParameters filter)
         {
             return Ok(await Mediator.Send(new GetAllVentasQuery
@@ -25,7 +25,7 @@ namespace WebAPI.Controllers.v1
         }
 
         //POST api/<controller>
-        [HttpPost]
+        [HttpPost("Guardar")]
         public async Task<IActionResult> Post(CreateVentaCommand command)
         {
             return Ok(await Mediator.Send(command));

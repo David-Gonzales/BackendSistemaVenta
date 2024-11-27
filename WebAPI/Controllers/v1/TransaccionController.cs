@@ -11,7 +11,7 @@ namespace WebAPI.Controllers.v1
     public class TransaccionController : BaseApiController
     {
         //GET api/<controller>
-        [HttpGet()]
+        [HttpGet("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllTransaccionesParameters filter)
         {
             return Ok(await Mediator.Send(new GetAllTransaccionesQuery
@@ -23,21 +23,21 @@ namespace WebAPI.Controllers.v1
         }
 
         //GET api/<controller>/id
-        [HttpGet("{id}")]
+        [HttpGet("Obtener")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await Mediator.Send(new GetTransaccionByIdQuery { Id = id }));
         }
 
         //POST api/<controller>
-        [HttpPost]
+        [HttpPost("Guardar")]
         public async Task<IActionResult> Post(CreateTransaccionCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         //PUT api/<controller>/id
-        [HttpPut("{id}")]
+        [HttpPut("Editar")]
         public async Task<IActionResult> Put(int id, UpdateTransaccionCommand command)
         {
             if (id != command.Id)
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers.v1
         }
 
         //DELETE api/<controller>
-        [HttpDelete("{id}")]
+        [HttpDelete("Eliminar")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await Mediator.Send(new DeleteTransaccionCommand { Id = id }));

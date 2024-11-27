@@ -1,9 +1,12 @@
-﻿using Application.Features.Clientes.Queries.GetClienteById;
+﻿using Application.DTOs;
+using Application.Features.Clientes.Queries.GetClienteById;
 using Application.Features.Usuarios.Commands.CreateUsuarioCommand;
 using Application.Features.Usuarios.Commands.DeleteUsuarioCommand;
 using Application.Features.Usuarios.Commands.UpdateUsuarioCommand;
 using Application.Features.Usuarios.Queries.GetAllUsuarios;
 using Application.Features.Usuarios.Queries.GetUsuarioById;
+using Application.Features.Usuarios.Queries.ValidarCredencialesUsuario;
+using Application.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.v1
@@ -12,7 +15,7 @@ namespace WebAPI.Controllers.v1
     public class UsuarioController : BaseApiController
     {
         //GET api/<controller>
-        [HttpGet()]
+        [HttpGet("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllUsuariosParameters filter)
         {
             return Ok(await Mediator.Send(new GetAllUsuariosQuery
@@ -24,32 +27,58 @@ namespace WebAPI.Controllers.v1
         }
 
         //GET api/<controller>/id
-        [HttpGet("{id}")]
+        [HttpGet("Obtener")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await Mediator.Send(new GetUsuarioByIdQuery { Id = id }));
         }
         //POST api/<controller>
-        [HttpPost]
+        [HttpPost("Guardar")]
         public async Task<IActionResult> Post(CreateUsuarioCommand command)
         {
             return Ok(await Mediator.Send(command));
         }
 
         //PUT api/<controller>/id
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, UpdateUsuarioCommand command)
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Put(UpdateUsuarioCommand command)
         {
-            if (id != command.Id)
-                return BadRequest();
             return Ok(await Mediator.Send(command));
         }
 
         //DELETE api/<controller>
-        [HttpDelete("{id}")]
+        [HttpDelete("Eliminar")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await Mediator.Send(new DeleteUsuarioCommand { Id = id }));
+        }
+
+        [HttpPost("IniciarSesion")]
+        public async Task<IActionResult> IniciarSesion([FromBody] LoginDto login)
+        {
+            if (login == null || string.IsNullOrEmpty(login.Correo) || string.IsNullOrEmpty(login.Clave))
+                return BadRequest("Correo y clave son obligatorios.");
+
+            try
+            {
+                // Enviar la query al Mediator
+                var response = await Mediator.Send(new ValidarCredencialesUsuarioQuery
+                {
+                    Correo = login.Correo,
+                    Clave = login.Clave
+                });
+
+                // Verificar si la respuesta tiene datos válidos
+                if (response.Data == null)
+                    return Unauthorized("Credenciales inválidas.");
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error en el servidor: {ex.Message}");
+            }
+
         }
     }
 }

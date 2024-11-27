@@ -11,8 +11,7 @@ namespace WebAPI.Controllers.v1
     public class ClienteController : BaseApiController
     {
         //GET api/<controller>
-        [HttpGet()]
-        [Route("Listar")]
+        [HttpGet("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllClientesParameters filter)
         {
             return Ok(await Mediator.Send(new GetAllClientesQuery 
@@ -25,14 +24,13 @@ namespace WebAPI.Controllers.v1
 
         //GET api/<controller>/id
         [HttpGet("Obtener")]
-        public async Task<IActionResult> Get([FromQuery] int id)
+        public async Task<IActionResult> Get(int id)
         {
             return Ok(await Mediator.Send(new GetClienteByIdQuery { Id = id }));
         }
 
         //POST api/<controller>
-        [HttpPost]
-        [Route("Guardar")]
+        [HttpPost("Guardar")]
         public async Task<IActionResult> Post(CreateClienteCommand command)
         {
             return Ok(await Mediator.Send(command));

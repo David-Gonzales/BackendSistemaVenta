@@ -15,7 +15,7 @@ namespace Application.Features.Usuarios.Commands.UpdateUsuarioCommand
         public required string Correo { get; set; }
         public required string Clave { get; set; }
         public bool EsActivo { get; set; }
-        public int? IdRol { get; set; }
+        public int IdRol { get; set; }
     }
     public class UpdateUsuarioCommandHandler : IRequestHandler<UpdateUsuarioCommand, Response<int>>
     {

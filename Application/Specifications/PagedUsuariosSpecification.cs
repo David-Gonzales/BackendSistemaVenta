@@ -8,7 +8,7 @@ namespace Application.Specifications
     {
         public PagedUsuariosSpecification(int pageSize, int pageNumber, string parametros)
         {
-            Query.Skip((pageNumber - 1) * pageSize)
+            Query.Include(r => r.Rol).Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
 
             if (!string.IsNullOrEmpty(parametros))

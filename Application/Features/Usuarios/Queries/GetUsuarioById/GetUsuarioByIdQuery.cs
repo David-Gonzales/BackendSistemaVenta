@@ -1,7 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
 using Application.Wrappers;
-using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -13,23 +12,37 @@ namespace Application.Features.Usuarios.Queries.GetUsuarioById
 
         public class GetUsuarioByIdQueryHandler : IRequestHandler<GetUsuarioByIdQuery, Response<UsuarioDto>>
         {
-            private readonly IRepositoryAsync<Usuario> _repositoryAsync;
-            private readonly IMapper _mapper;
+            private readonly IRepositoryAsync<Usuario> _repositoryUsuarioAsync;
+            private readonly IRepositoryAsync<Rol> _repositoryRolAsync;
 
-            public GetUsuarioByIdQueryHandler(IRepositoryAsync<Usuario> repositoryAsync, IMapper mapper)
+            public GetUsuarioByIdQueryHandler(IRepositoryAsync<Usuario> repositoryUsuarioAsync, IRepositoryAsync<Rol> repositoryRolAsync)
             {
-                _repositoryAsync = repositoryAsync;
-                _mapper = mapper;
+                _repositoryUsuarioAsync = repositoryUsuarioAsync;
+                _repositoryRolAsync = repositoryRolAsync;
             }
 
             public async Task<Response<UsuarioDto>> Handle(GetUsuarioByIdQuery request, CancellationToken cancellationToken)
             {
-                var usuario = await _repositoryAsync.GetByIdAsync(request.Id);
+                var usuario = await _repositoryUsuarioAsync.GetByIdAsync(request.Id);
                 if(usuario != null)
                 {
-                    var usuarioDto = _mapper.Map<UsuarioDto>(usuario);
+                    var rol = await _repositoryRolAsync.GetByIdAsync(usuario.IdRol);
 
-                    return new Response<UsuarioDto>(usuarioDto);
+                    var resultado = new UsuarioDto {
+                        Id = usuario.Id,
+                        Nombres = usuario.Nombres,
+                        Apellidos = usuario.Apellidos,
+                        Telefono = usuario.Telefono,
+                        Correo = usuario.Correo,
+                        Clave = usuario.Clave,
+                        EsActivo = usuario.EsActivo,
+
+                        IdRol = rol.Id,
+                        NombreRol = rol.Nombre
+
+                    };
+
+                    return new Response<UsuarioDto>(resultado);
                 }
                 else
                 {

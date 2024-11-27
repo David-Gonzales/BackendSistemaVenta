@@ -21,6 +21,9 @@ namespace Persistence
             #region Repositorios
             //Matriculamos el patrón repositorio
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            //Matriculo el repositorio de usuario (inicio de sesión)
+            services.AddTransient<IUsuarioRepositoryAsync, UsuarioRepositoryAsync>();
+
             #endregion
         }
     }

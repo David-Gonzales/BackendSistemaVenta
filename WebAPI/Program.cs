@@ -18,6 +18,16 @@ builder.Services.AgregarSharedInfrastructure(builder.Configuration);
 builder.Services.AgregarPersistenceInfrastructure(builder.Configuration);
 builder.Services.AgregarVersionamientoAPIExtension();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("NuevaPolitica", app =>
+    {
+        app.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +43,8 @@ app.UseAuthorization();
 
 //Agregamos Mddleware
 app.UseErrorHandlingMiddleware();
+
+app.UseCors("NuevaPolitica");
 
 app.MapControllers();
 

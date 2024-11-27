@@ -12,7 +12,7 @@ namespace Domain.Entities
         public bool EsActivo { get; set; }
 
         //FK Rol (N - 1)
-        public int? IdRol { get; set; }
+        public int IdRol { get; set; }
         public Rol? Rol { get; set; }
 
         //(1 - N)
