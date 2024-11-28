@@ -32,7 +32,8 @@ namespace Application.Features.Productos.Commands.UpdateProductoCommand
                 .LessThanOrEqualTo(10000).WithMessage("{PropertyName} no debe exceder de 10,000");
 
             RuleFor(p => p.EsActivo)
-                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
+                .Must(value => value == true || value == false)
+                .WithMessage("{PropertyName} debe ser un valor booleano válido.");
         }
     }
 }

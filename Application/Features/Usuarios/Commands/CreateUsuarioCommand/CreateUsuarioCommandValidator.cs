@@ -30,7 +30,8 @@ namespace Application.Features.Usuarios.Commands.CreateUsuarioCommand
                 .MaximumLength(50).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
 
             RuleFor(p => p.EsActivo)
-                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
+                .Must(value => value == true || value == false)
+                .WithMessage("{PropertyName} debe ser un valor booleano válido.");
 
 
         }

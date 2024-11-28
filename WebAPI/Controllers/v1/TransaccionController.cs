@@ -38,10 +38,8 @@ namespace WebAPI.Controllers.v1
 
         //PUT api/<controller>/id
         [HttpPut("Editar")]
-        public async Task<IActionResult> Put(int id, UpdateTransaccionCommand command)
+        public async Task<IActionResult> Put(UpdateTransaccionCommand command)
         {
-            if (id != command.Id)
-                return BadRequest();
             return Ok(await Mediator.Send(command));
         }
 

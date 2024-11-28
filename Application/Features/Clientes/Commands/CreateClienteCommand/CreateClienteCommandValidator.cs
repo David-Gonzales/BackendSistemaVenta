@@ -41,7 +41,8 @@ namespace Application.Features.Clientes.Commands.CreateClienteCommand
                 .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
 
             RuleFor(p => p.EsActivo)
-                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
+                .Must(value => value == true || value == false)
+                .WithMessage("{PropertyName} debe ser un valor booleano válido.");
         }
     }
 }
