@@ -35,9 +35,12 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
                 var clientes = await _repositoryClienteAsync.ListAsync();
                 var detalleVenta = await _repositoryDetalleVentaAsync.ListAsync(new DetalleVentaSpecification(), cancellationToken);
 
-                var resultado = ventas.Select(v=> new HistorialVentaDto
+                var resultado = ventas
+                    .OrderByDescending(v => v.Created)
+                    .Select(v=> new HistorialVentaDto
                 {
                     Id = v.Id,
+                    FechaRegistro = v.Created,
                     NumeroVenta = v.NumeroVenta,
                     TipoVenta = v.TipoVenta,
                     TipoPago = v.TipoPago,

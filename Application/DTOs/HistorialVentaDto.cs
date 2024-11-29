@@ -3,6 +3,7 @@
     public class HistorialVentaDto
     {
         public int Id { get; set; }
+        public DateTime FechaRegistro { get; set; }
         public string NumeroVenta { get; set; }
         public string TipoVenta { get; set; }
         public string TipoPago { get; set; }
