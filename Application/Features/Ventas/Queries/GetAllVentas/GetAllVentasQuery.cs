@@ -36,7 +36,7 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
                 var detalleVenta = await _repositoryDetalleVentaAsync.ListAsync(new DetalleVentaSpecification(), cancellationToken);
 
                 var resultado = ventas
-                    .OrderByDescending(v => v.Created)
+                    .OrderByDescending(v => v.NumeroVenta)
                     .Select(v=> new HistorialVentaDto
                 {
                     Id = v.Id,
