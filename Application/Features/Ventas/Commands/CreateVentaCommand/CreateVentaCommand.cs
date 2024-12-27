@@ -9,7 +9,7 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
     public class CreateVentaCommand : IRequest<Response<int>>
     {
         public required string NumeroVenta { get; set; }
-        public required string TipoVenta { get; set; }
+        //public required string TipoVenta { get; set; }
         public required string TipoPago { get; set; }
         //public decimal Total { get; set; }
         public int IdCliente { get; set; }
@@ -46,9 +46,22 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
 
                 if (producto != null)
                 {
+
+                    if (producto.Stock < detalle.Cantidad)
+                    {
+                        throw new InvalidOperationException(
+                            $"Stock insuficiente para el producto con ID {detalle.IdProducto}. Disponible: {producto.Stock}, solicitado: {detalle.Cantidad}");
+                    }
+
                     detalle.PrecioUnitario = producto.Precio;
                     detalle.Total = detalle.Cantidad * detalle.PrecioUnitario;
                     totalVenta += detalle.Total;
+
+                    // Reducción del stock del producto
+                    producto.Stock -= detalle.Cantidad;
+
+                    // F5
+                    await _productoRepositoryAsync.UpdateAsync(producto);
                 }
                 else
                 {

@@ -15,9 +15,9 @@ namespace Persistence.Configuration
             builder.Property(p => p.NumeroVenta)
                 .HasMaxLength(5);//00001, 00002, etc...
 
-            builder.Property(p => p.TipoVenta)
-                .HasMaxLength(6)//Normal - Refill
-                .IsRequired();
+            //builder.Property(p => p.TipoVenta)
+            //    .HasMaxLength(6)//Normal - Refill
+            //    .IsRequired();
 
             builder.Property(p => p.TipoPago)
                 .HasMaxLength(15)//Efectivo - Contraentrega - Tarjeta

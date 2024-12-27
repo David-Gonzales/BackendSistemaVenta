@@ -5,7 +5,7 @@ namespace Domain.Entities
     public  class Venta : AuditableBaseEntity
     {
         public string? NumeroVenta { get; set; }
-        public required string TipoVenta { get; set; }  
+        //public required string TipoVenta { get; set; }  
         public required string TipoPago { get; set; }
         public decimal SubTotal => DetalleVentas?.Sum(detalle => detalle.Total) ?? 0;
         public decimal Total { get; set; }

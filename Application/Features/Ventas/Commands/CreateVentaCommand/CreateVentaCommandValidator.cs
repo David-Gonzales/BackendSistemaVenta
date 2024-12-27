@@ -11,10 +11,10 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
             RuleFor(p => p.NumeroVenta)
                 .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
 
-            RuleFor(p => p.TipoVenta)
-                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
-                //Normal o Refill
-                .MaximumLength(6).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
+            //RuleFor(p => p.TipoVenta)
+            //    .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
+            //    //Normal o Refill
+            //    .MaximumLength(6).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
 
             RuleFor(p => p.TipoPago)
                 .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")

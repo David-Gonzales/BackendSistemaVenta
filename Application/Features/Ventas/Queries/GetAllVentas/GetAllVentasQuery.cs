@@ -42,7 +42,7 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
                     Id = v.Id,
                     FechaRegistro = v.Created,
                     NumeroVenta = v.NumeroVenta,
-                    TipoVenta = v.TipoVenta,
+                    //TipoVenta = v.TipoVenta,
                     TipoPago = v.TipoPago,
                     Total = v.Total,
 
