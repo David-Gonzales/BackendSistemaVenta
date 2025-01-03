@@ -8,7 +8,7 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
 {
     public class CreateVentaCommand : IRequest<Response<int>>
     {
-        public required string NumeroVenta { get; set; }
+        //public required string NumeroVenta { get; set; }
         //public required string TipoVenta { get; set; }
         public required string TipoPago { get; set; }
         //public decimal Total { get; set; }
@@ -20,18 +20,45 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
     public class CreateVentaCommandHandler : IRequestHandler<CreateVentaCommand, Response<int>>
     {
         private readonly IRepositoryAsync<Venta> _repositoryAsync;
+        private readonly IRepositoryAsync<NumeroVenta> _numeroVentaRepositoryAsync;
         private readonly IRepositoryAsync<Producto> _productoRepositoryAsync;
         private readonly IMapper _mapper;
 
-        public CreateVentaCommandHandler(IRepositoryAsync<Venta> repositoryAsync, IMapper mapper, IRepositoryAsync<Producto> productoRepositoryAsync)
+        public CreateVentaCommandHandler(IRepositoryAsync<Venta> repositoryAsync, IRepositoryAsync<NumeroVenta> numeroVentaRepositoryAsync, IMapper mapper, IRepositoryAsync<Producto> productoRepositoryAsync)
         {
             _repositoryAsync = repositoryAsync;
+            _numeroVentaRepositoryAsync = numeroVentaRepositoryAsync;
             _productoRepositoryAsync = productoRepositoryAsync;
             _mapper = mapper;
         }
         public async Task<Response<int>> Handle(CreateVentaCommand request, CancellationToken cancellationToken)
         {
+            var numeroVenta = await _numeroVentaRepositoryAsync.FirstOrDefaultAsync(cancellationToken); 
+
+            if (numeroVenta == null)
+            {
+                numeroVenta = new NumeroVenta
+                {
+                    UltimoNumero = 0,
+                    FechaRegistro = DateTime.Now
+                };
+
+                await _numeroVentaRepositoryAsync.AddAsync(numeroVenta);
+                await _numeroVentaRepositoryAsync.SaveChangesAsync(cancellationToken);
+            }
+
+            numeroVenta.UltimoNumero++;
+
+            //string ceros = new string('0', 5);
+            //string nuevoNumeroVenta = ceros + numeroVenta.UltimoNumero;
+            //nuevoNumeroVenta = nuevoNumeroVenta[^5..]; // Extrae los últimos 5 caracteres
+
+            numeroVenta.FechaRegistro = DateTime.Now;
+            await _numeroVentaRepositoryAsync.UpdateAsync(numeroVenta);
+            await _numeroVentaRepositoryAsync.SaveChangesAsync(cancellationToken);
+
             var nuevaVenta = _mapper.Map<Venta>(request);
+            nuevaVenta.NumeroVenta = numeroVenta.UltimoNumero.ToString("D5");
             decimal totalVenta = 0;
 
             foreach (var detalle in request.DetalleVentas)

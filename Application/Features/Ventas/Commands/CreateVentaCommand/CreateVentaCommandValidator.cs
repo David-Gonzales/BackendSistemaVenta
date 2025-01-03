@@ -8,8 +8,8 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
         public CreateVentaCommandValidator() 
         {
 
-            RuleFor(p => p.NumeroVenta)
-                .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
+            //RuleFor(p => p.NumeroVenta)
+            //   .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.");
 
             //RuleFor(p => p.TipoVenta)
             //    .NotEmpty().WithMessage("{PropertyName} no puede ser vacío.")
