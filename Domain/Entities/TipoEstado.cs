@@ -3,6 +3,6 @@
     public enum TipoEstado
     {
         Lleno,
-        Vacío
+        Vacio
     }
 }

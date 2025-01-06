@@ -20,6 +20,10 @@ namespace Persistence.Configuration
                 .HasConversion<string>()//Lleno o Vacío
                 .IsRequired();
 
+            builder.Property(p => p.TipoVenta)
+                .HasConversion<string>()//Normal o Refill
+                .IsRequired();
+
             builder.Property(p => p.PrecioUnitario)
                 .HasColumnType("decimal(7,2)")
                 .IsRequired();

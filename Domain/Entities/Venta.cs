@@ -7,7 +7,7 @@ namespace Domain.Entities
         public string? NumeroVenta { get; set; }
         //public required string TipoVenta { get; set; }  
         public required string TipoPago { get; set; }
-        public decimal SubTotal => DetalleVentas?.Sum(detalle => detalle.Total) ?? 0;
+        //public decimal SubTotal => DetalleVentas?.Sum(detalle => detalle.Total) ?? 0;
         public decimal Total { get; set; }
 
         //Relación con el Cliente (1 por cada venta) que realizó la compra

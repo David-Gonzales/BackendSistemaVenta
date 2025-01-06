@@ -41,10 +41,18 @@ namespace Application.Mappings
             CreateMap<DeleteUsuarioCommand, Usuario>();
 
             //Mapeo la Venta pero ignora los detalles en el mapeo inicial
-            CreateMap<CreateVentaCommand, Venta>().ForMember(dest => dest.DetalleVentas, opt => opt.Ignore());
+            //CreateMap<CreateVentaCommand, Venta>().ForMember(dest => dest.DetalleVentas, opt => opt.Ignore());
+
+            ////Mapeo explícito la Venta los detalles en el mapeo inicial
+            CreateMap<CreateVentaCommand, Venta>().ForMember(dest => dest.DetalleVentas, opt => opt.MapFrom(src => src.DetalleVentas));
+
 
             CreateMap<CreateDetalleVentaCommand, DetalleVenta>()
-            .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.Cantidad * src.PrecioUnitario)); // Si quieres calcular Total
+            .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.Cantidad * src.PrecioUnitario)) // Si quieres calcular Total
+            .ForMember(dest => dest.TipoEstado, opt => opt.MapFrom(src => Enum.Parse<TipoEstado>(src.TipoEstado)))
+            .ForMember(dest => dest.TipoVenta, opt => opt.MapFrom(src => Enum.Parse<TipoVenta>(src.TipoVenta)));
+
+            //Esto asegura que las propiedades TipoEstado y TipoVenta (que son enums en DetalleVenta) se conviertan correctamente desde los strings proporcionados en el comando.
             #endregion
 
             #region DTOs

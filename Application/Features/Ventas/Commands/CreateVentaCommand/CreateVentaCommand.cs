@@ -80,7 +80,40 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
                             $"Stock insuficiente para el producto con ID {detalle.IdProducto}. Disponible: {producto.Stock}, solicitado: {detalle.Cantidad}");
                     }
 
-                    detalle.PrecioUnitario = producto.Precio;
+                    // Validar y ajustar el precio unitario según las reglas del negocio
+                    switch (detalle.TipoVenta)
+                    {
+                        case "Normal":
+                            if (detalle.TipoEstado == "Lleno")
+                            {
+                                detalle.PrecioUnitario = producto.Precio; // Precio base del producto
+                            }
+                            else if (detalle.TipoEstado == "Vacio" && detalle.PrecioUnitario > 0)
+                            {
+                                // Precio definido por el usuario - No es necesario colocar nada aquí ya que el comando CreateDetalleVentaCommand asigna automáticamente el valor de PrecioUnitario
+                            }
+                            else
+                            {
+                                throw new ArgumentException(
+                                    $"El precio para un producto vacío debe ser mayor a 0. ID Producto: {detalle.IdProducto}");
+                            }
+                            break;
+
+                        case "Refill":
+                            if (detalle.TipoEstado == "Lleno" && detalle.PrecioUnitario > 0)
+                            {
+                                // Precio definido por el usuario - No es necesario colocar nada aquí ya que el comando CreateDetalleVentaCommand asigna automáticamente el valor de PrecioUnitario
+                            }
+                            else
+                            {
+                                throw new ArgumentException(
+                                    $"El precio para un refill debe ser mayor a 0. ID Producto: {detalle.IdProducto}");
+                            }
+                            break;
+
+                        default:
+                            throw new ArgumentException($"Tipo de venta no válido: {detalle.TipoVenta}");
+                    }
                     detalle.Total = detalle.Cantidad * detalle.PrecioUnitario;
                     totalVenta += detalle.Total;
 
