@@ -3,6 +3,7 @@ using Application.Features.Clientes.Commands.DeleteClienteCommand;
 using Application.Features.Clientes.Commands.UpdateClienteCommand;
 using Application.Features.Clientes.Queries.GetAllClientes;
 using Application.Features.Clientes.Queries.GetClienteById;
+using Application.Features.Clientes.Queries.TieneVentas;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.v1
@@ -28,6 +29,18 @@ namespace WebAPI.Controllers.v1
         {
             return Ok(await Mediator.Send(new GetClienteByIdQuery { Id = id }));
         }
+
+        [HttpGet("TieneVentas")]
+        public async Task<IActionResult> TieneVentas(int id)
+        {
+            var response = await Mediator.Send(new TieneVentasQuery { Id = id });
+            if (response.Succeeded)
+            {
+                return Ok(response.Data); // Devuelve verdadero o falso si el cliente tiene ventas
+            }
+            return BadRequest(response.Message);
+        }
+
 
         //POST api/<controller>
         [HttpPost("Guardar")]
