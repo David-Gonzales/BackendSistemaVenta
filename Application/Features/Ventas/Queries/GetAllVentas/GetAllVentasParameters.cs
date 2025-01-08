@@ -4,8 +4,9 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
 {
     public class GetAllVentasParameters : RequestParameter
     {
+        public string? BuscarPor { get; set; }
         public string? NumeroVenta { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
+        public string? FechaInicio { get; set; }
+        public string? FechaFin { get; set; }
     }
 }

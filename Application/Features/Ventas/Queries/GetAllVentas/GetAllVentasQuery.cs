@@ -4,6 +4,7 @@ using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
+using System.Diagnostics;
 
 namespace Application.Features.Ventas.Queries.GetAllVentas
 {
@@ -11,9 +12,10 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public string? BuscarPor { get; set; }
         public string? NumeroVenta { get; set; }
-        public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
+        public string? FechaInicio { get; set; }
+        public string? FechaFin { get; set; }
 
         public class GetAllVentasQueryHandler : IRequestHandler<GetAllVentasQuery, PagedResponse<List<HistorialVentaDto>>>
         {
@@ -30,7 +32,7 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
 
             public async Task<PagedResponse<List<HistorialVentaDto>>> Handle(GetAllVentasQuery request, CancellationToken cancellationToken)
             {
-                var ventas = await _repositoryVentaAsync.ListAsync(new PagedVentasSpecification(request.PageSize, request.PageNumber, request.NumeroVenta, request.FechaInicio, request.FechaFin));
+                var ventas = await _repositoryVentaAsync.ListAsync(new PagedVentasSpecification(request.PageSize, request.PageNumber, request.BuscarPor, request.NumeroVenta, request.FechaInicio, request.FechaFin));
 
                 var clientes = await _repositoryClienteAsync.ListAsync();
                 var detalleVenta = await _repositoryDetalleVentaAsync.ListAsync(new DetalleVentaSpecification(), cancellationToken);
@@ -55,6 +57,8 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
                     {
                         Id = dv.Id,
                         Cantidad = dv.Cantidad,
+                        TipoEstado = dv.TipoEstado.ToString(),
+                        TipoVenta = dv.TipoVenta.ToString(),
                         PrecioUnitario = dv.PrecioUnitario,
                         Total = dv.Total,
                         IdProducto = dv.IdProducto,
