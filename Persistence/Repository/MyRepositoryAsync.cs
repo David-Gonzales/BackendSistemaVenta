@@ -2,6 +2,7 @@
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
+using System.Linq.Expressions;
 
 namespace Persistence.Repository
 {
@@ -17,6 +18,16 @@ namespace Persistence.Repository
         public async Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken)
         {
             return await _dbContext.Set<T>().FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+        {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate), "El predicado no puede ser nulo.");
+            }
+
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(predicate, cancellationToken);
         }
 
         // Propiedad para acceder al DbContext y usar (por ejemplo) las extensiones de repositorio

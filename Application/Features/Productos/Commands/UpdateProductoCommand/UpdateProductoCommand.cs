@@ -3,7 +3,6 @@ using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
-using Microsoft.Win32;
 
 namespace Application.Features.Productos.Commands.UpdateProductoCommand
 {
@@ -13,7 +12,6 @@ namespace Application.Features.Productos.Commands.UpdateProductoCommand
         public required string Nombre { get; set; }
         public required int Capacidad { get; set; }
         public required string Unidad { get; set; }
-        public required int Stock { get; set; }
         public required decimal Precio { get; set; }
         public bool EsActivo { get; set; }
     }
@@ -37,7 +35,6 @@ namespace Application.Features.Productos.Commands.UpdateProductoCommand
                 producto.Nombre = request.Nombre;
                 producto.Capacidad = request.Capacidad;
                 producto.Unidad = request.Unidad;
-                producto.Stock = request.Stock;
                 producto.Precio = request.Precio;
                 producto.EsActivo = request.EsActivo;
 

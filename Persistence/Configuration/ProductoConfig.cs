@@ -23,8 +23,8 @@ namespace Persistence.Configuration
                 .HasMaxLength(3)
                 .IsRequired();
 
-            builder.Property(p => p.Stock)
-                .IsRequired();
+            //builder.Property(p => p.Stock)
+            //    .IsRequired();
 
             builder.Property(p => p.Precio)
                 .HasColumnType("decimal(7,2)")
@@ -49,6 +49,12 @@ namespace Persistence.Configuration
 
             //Transaccion (1 - N)
             builder.HasMany(p => p.Transacciones)
+                .WithOne(t => t.Producto)
+                .HasForeignKey(t => t.IdProducto)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //Transaccion (1 - N)
+            builder.HasMany(p => p.Estados)
                 .WithOne(t => t.Producto)
                 .HasForeignKey(t => t.IdProducto)
                 .OnDelete(DeleteBehavior.Cascade);

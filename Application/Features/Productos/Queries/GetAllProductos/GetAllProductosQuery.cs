@@ -2,7 +2,6 @@
 using Application.Interfaces;
 using Application.Specifications;
 using Application.Wrappers;
-using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -17,19 +16,27 @@ namespace Application.Features.Productos.Queries.GetAllProductos
         public class GetAllProductosQueryHandler : IRequestHandler<GetAllProductosQuery, PagedResponse<List<ProductoDto>>>
         {
             private readonly IRepositoryAsync<Producto> _repositoryAsync;
-            private readonly IMapper _mapper;
             
-            public GetAllProductosQueryHandler(IRepositoryAsync<Producto> repositoryAsync, IMapper mapper)
+            public GetAllProductosQueryHandler(IRepositoryAsync<Producto> repositoryAsync)
             {
                 _repositoryAsync = repositoryAsync;
-                _mapper = mapper;
             }
 
             public async Task<PagedResponse<List<ProductoDto>>> Handle(GetAllProductosQuery request, CancellationToken cancellationToken)
             {
                 //Devuelve un listado de clientes con la especificación que le pase
                 var productos = await _repositoryAsync.ListAsync(new PagedProductosSpecification(request.PageSize, request.PageNumber, request.Parametros));
-                var productosDto = _mapper.Map<List<ProductoDto>>(productos);
+
+                var productosDto = productos.Select(p => new ProductoDto
+                {
+                    Id = p.Id,
+                    Nombre = p.Nombre,
+                    Capacidad = p.Capacidad,
+                    Unidad = p.Unidad,
+                    Precio = p.Precio,
+                    EsActivo = p.EsActivo,
+                    StockGeneral = p.Estados?.Sum(e => e.Stock) ?? 0 // Calcular el stock total sumando los valores de stock de los estados y si Estados es null, usar 0 como valor por defecto
+                }).ToList();
 
                 return new PagedResponse<List<ProductoDto>>(productosDto, request.PageNumber, request.PageSize);
             }

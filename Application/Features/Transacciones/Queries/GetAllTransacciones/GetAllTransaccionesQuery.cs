@@ -41,16 +41,16 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
                     select new TransaccionDto
                     {
                         Id = T.Id,
-                        TipoTransaccion = T.TipoTransaccion,
+                        TipoTransaccion = T.TipoTransaccion.ToString(),
                         Fecha = T.Fecha,
                         Cantidad = T.Cantidad,
-                        TipoEstado = T.TipoEstado,
+                        TipoEstado = T.TipoEstado.ToString(),
 
                         IdProducto = P.Id,
                         NombreProducto = P.Nombre,
                         CapacidadProducto = P.Capacidad,
                         UnidadProducto = P.Unidad,
-                        StockProductoPrincipal = P.Stock,
+                        //StockProductoPrincipal = P.Stock,
 
                         IdUsuario = U.Id,
                         NombreUsuario = U.Nombres,

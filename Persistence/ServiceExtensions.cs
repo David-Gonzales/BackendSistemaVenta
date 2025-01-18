@@ -23,7 +23,10 @@ namespace Persistence
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
             //Matriculo el repositorio de usuario (inicio de sesión)
             services.AddTransient<IUsuarioRepositoryAsync, UsuarioRepositoryAsync>();
-
+            //Matriculo el UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //Matriculo el servicio de EstadoProducto
+            services.AddScoped<IEstadoProductoService, EstadoProductoService>();
             #endregion
         }
     }

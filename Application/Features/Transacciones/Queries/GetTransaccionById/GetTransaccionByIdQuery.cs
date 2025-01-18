@@ -34,16 +34,16 @@ namespace Application.Features.Transacciones.Queries.GetTransaccionById
 
                     var resultado = new TransaccionDto { 
                             Id = transaccion.Id,
-                            TipoTransaccion = transaccion.TipoTransaccion,
+                            TipoTransaccion = transaccion.TipoTransaccion.ToString(),
                             Fecha = transaccion.Fecha,
                             Cantidad = transaccion.Cantidad,
-                            TipoEstado = transaccion.TipoEstado,
+                            TipoEstado = transaccion.TipoEstado.ToString(),
 
                             IdProducto = producto.Id,
                             NombreProducto = producto.Nombre,
                             CapacidadProducto = producto.Capacidad,
                             UnidadProducto = producto.Unidad,
-                            StockProductoPrincipal = producto.Stock,
+                            //StockProductoPrincipal = producto.Stock,
 
                             IdUsuario = usuario.Id,
                             NombreUsuario = usuario.Nombres,

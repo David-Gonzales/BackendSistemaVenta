@@ -11,9 +11,9 @@ namespace Application.Features.Productos.Commands.CreateProductoCommand
         public required string Nombre { get; set; }
         public required int Capacidad { get; set; }
         public required string Unidad { get; set; }
-        public required int Stock { get; set; }
         public required decimal Precio { get; set; }
         public bool EsActivo { get; set; }
+        //public ICollection<CreateEstadoProductoCommand>? Estados { get; set; }
     }
 
     public class CreateProductoCommandHandler : IRequestHandler<CreateProductoCommand, Response<int>>
@@ -30,6 +30,21 @@ namespace Application.Features.Productos.Commands.CreateProductoCommand
         public async Task<Response<int>> Handle(CreateProductoCommand request, CancellationToken cancellationToken)
         {
             var nuevoProducto = _mapper.Map<Producto>(request);
+
+            nuevoProducto.Estados = new List<EstadoProducto>
+            {
+                new EstadoProducto
+                {
+                    TipoEstado = TipoEstado.Lleno, // El estado "Lleno"
+                    Stock = 0 // Inicializamos el stock en 0
+                },
+                new EstadoProducto
+                {
+                    TipoEstado = TipoEstado.Vacio, // El estado "Vacío"
+                    Stock = 0 // Inicializamos el stock en 0
+                }
+            };
+
             var data = await _repositoryAsync.AddAsync(nuevoProducto);
 
             return new Response<int>(data.Id);

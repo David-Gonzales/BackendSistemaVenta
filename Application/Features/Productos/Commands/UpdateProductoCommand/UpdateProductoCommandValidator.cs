@@ -21,9 +21,9 @@ namespace Application.Features.Productos.Commands.UpdateProductoCommand
                 .NotEmpty().WithMessage("{PropertyName} no puede ser vacío")
                 .MaximumLength(3).WithMessage("{PropertyName} no debe exceder de {MaxLength} caracteres.");
 
-            RuleFor(p => p.Stock)
-                //>=0
-                .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} debe ser mayor que cero");
+            //RuleFor(p => p.Stock)
+            //    //>=0
+            //    .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} debe ser mayor que cero");
 
             RuleFor(p => p.Precio)
                 //>0

@@ -18,6 +18,9 @@ namespace Application.Specifications
                     EF.Functions.Like(x.Unidad, $"%{parametros}%")
                 );
             }
+
+            // Cargar la relación de EstadosProducto
+            Query.Include(x => x.Estados);
         }
     }
 }

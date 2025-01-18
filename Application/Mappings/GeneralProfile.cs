@@ -27,11 +27,14 @@ namespace Application.Mappings
             CreateMap<UpdateClienteCommand, Cliente>();
             CreateMap<DeleteClienteCommand, Cliente>();
 
-            CreateMap<CreateProductoCommand, Producto>();
+            CreateMap<CreateProductoCommand, Producto>()
+                .ForMember(dest => dest.Estados, opt => opt.Ignore()); // Los estados se mapean manualmente
             CreateMap<UpdateProductoCommand, Producto>();
             CreateMap<DeleteProductoCommand, Producto>();
 
-            CreateMap<CreateTransaccionCommand, Transaccion>();
+            CreateMap<CreateTransaccionCommand, Transaccion>()
+                .ForMember(dest => dest.TipoTransaccion, opt => opt.MapFrom(src => Enum.Parse<TipoTransaccion>(src.TipoTransaccion)))
+                .ForMember(dest => dest.TipoEstado, opt => opt.MapFrom(src => Enum.Parse<TipoEstado>(src.TipoEstado)));
             CreateMap<UpdateTransaccionCommand, Transaccion>();
             CreateMap<DeleteTransaccionCommand, Transaccion>();
 
@@ -58,7 +61,8 @@ namespace Application.Mappings
             #region DTOs
             CreateMap<Cliente, ClienteDto>();
             CreateMap<Menu, MenuDto>();
-            CreateMap<Producto, ProductoDto>();
+            CreateMap<Producto, ProductoDto>();//ya no es útil
+            CreateMap<EstadoProducto, EstadoProductoDto>();
             CreateMap<Rol, RolDto>();
             CreateMap<Transaccion, TransaccionDto>();
             CreateMap<Usuario, UsuarioDto>();

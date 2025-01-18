@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.Features.Productos.Queries.GetProductoById;
+using Application.Interfaces;
+using Application.Specifications;
 using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
@@ -69,15 +71,22 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
                     throw new ArgumentException($"Producto no encontrado con el id {detalle.IdProducto}");
                 }
 
-                var producto = await _productoRepositoryAsync.GetByIdAsync(detalle.IdProducto);
+                var producto = await _productoRepositoryAsync.FirstOrDefaultAsync(new ProductoSpecification(detalle.IdProducto), cancellationToken); 
 
                 if (producto != null)
                 {
+                    // Validar y ajustar el stock según el estado
+                    var estadoProducto = producto.Estados.FirstOrDefault(e => e.TipoEstado.ToString() == detalle.TipoEstado);
 
-                    if (producto.Stock < detalle.Cantidad)
+                    if (estadoProducto == null)
+                    {
+                        throw new ArgumentException($"Estado de producto no válido: {detalle.TipoEstado} para el producto con ID {detalle.IdProducto}");
+                    }
+
+                    if (estadoProducto.Stock < detalle.Cantidad)
                     {
                         throw new InvalidOperationException(
-                            $"Stock insuficiente para el producto con ID {detalle.IdProducto}. Disponible: {producto.Stock}, solicitado: {detalle.Cantidad}");
+                            $"Stock insuficiente para el producto con ID {detalle.IdProducto} en estado {detalle.TipoEstado}. Disponible: {estadoProducto.Stock}, solicitado: {detalle.Cantidad}");
                     }
 
                     // Validar y ajustar el precio unitario según las reglas del negocio
@@ -117,8 +126,8 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
                     detalle.Total = detalle.Cantidad * detalle.PrecioUnitario;
                     totalVenta += detalle.Total;
 
-                    // Reducción del stock del producto
-                    producto.Stock -= detalle.Cantidad;
+                    // Reducción del stock del producto en el estado correspondiente
+                    estadoProducto.Stock -= detalle.Cantidad;
 
                     // F5
                     await _productoRepositoryAsync.UpdateAsync(producto);
