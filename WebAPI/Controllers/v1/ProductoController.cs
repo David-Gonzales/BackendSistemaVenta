@@ -3,6 +3,7 @@ using Application.Features.Productos.Commands.DeleteProductoCommand;
 using Application.Features.Productos.Commands.UpdateProductoCommand;
 using Application.Features.Productos.Queries.GetAllProductos;
 using Application.Features.Productos.Queries.GetProductoById;
+using Application.Features.Productos.Queries.GetProductosEstados;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.v1
@@ -20,6 +21,13 @@ namespace WebAPI.Controllers.v1
                 PageSize = filter.PageSize,
                 Parametros = filter.Parametros
             }));
+        }
+
+        //GET api/<controller>
+        [HttpGet("ListarProductosEstados")]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await Mediator.Send(new GetProductosEstadosQuery{}));
         }
 
         //GET api/<controller>/id

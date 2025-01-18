@@ -1,12 +1,14 @@
 ﻿using Application.Interfaces;
+using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Contexts;
 using System.Linq.Expressions;
 
 namespace Persistence.Repository
 {
-    public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T> where T : class
+    public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T>, IReadRepositoryAsync<T> where T : class
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -20,14 +22,22 @@ namespace Persistence.Repository
             return await _dbContext.Set<T>().FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool asNoTracking = false, CancellationToken cancellationToken = default)
         {
-            if (predicate == null)
+            var query = _dbContext.Set<T>().Where(predicate);
+
+            if (asNoTracking)
             {
-                throw new ArgumentNullException(nameof(predicate), "El predicado no puede ser nulo.");
+                query = query.AsNoTracking();
             }
 
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(predicate, cancellationToken);
+            return await query.FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task DesasociarAsync(T entidad)
+        {
+            _dbContext.Entry(entidad).State = EntityState.Detached;
+            await Task.CompletedTask;
         }
 
         // Propiedad para acceder al DbContext y usar (por ejemplo) las extensiones de repositorio

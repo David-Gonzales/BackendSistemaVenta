@@ -5,6 +5,7 @@ using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Ventas.Commands.CreateVentaCommand
 {
@@ -71,7 +72,8 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
                     throw new ArgumentException($"Producto no encontrado con el id {detalle.IdProducto}");
                 }
 
-                var producto = await _productoRepositoryAsync.FirstOrDefaultAsync(new ProductoSpecification(detalle.IdProducto), cancellationToken); 
+                var producto = await _productoRepositoryAsync
+                    .FirstOrDefaultAsync(new ProductoSpecification(detalle.IdProducto, asNoTracking: true), cancellationToken); 
 
                 if (producto != null)
                 {
@@ -129,8 +131,19 @@ namespace Application.Features.Ventas.Commands.CreateVentaCommand
                     // Reducción del stock del producto en el estado correspondiente
                     estadoProducto.Stock -= detalle.Cantidad;
 
+                    foreach (var estado in producto.Estados) 
+                    {
+                        if (estado.Id == estadoProducto.Id)
+                        {
+                            estado.Stock = estadoProducto.Stock;
+                        }
+                    }
+
                     // F5
                     await _productoRepositoryAsync.UpdateAsync(producto);
+                    await _productoRepositoryAsync.SaveChangesAsync();
+                    // Desasociar el producto actual de EF antes de actualizarlo, esto me sirve para poder insertar otro detalle con el mismo producto y que EF no se bloquee al intentar actualizar el producto
+                    await _productoRepositoryAsync.DesasociarAsync(producto);
                 }
                 else
                 {

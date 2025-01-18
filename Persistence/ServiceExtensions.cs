@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +22,11 @@ namespace Persistence
             #region Repositorios
             //Matriculamos el patrón repositorio
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            services.AddTransient<IReadRepositoryAsync<Producto>, MyRepositoryAsync<Producto>>();
+
             //Matriculo el repositorio de usuario (inicio de sesión)
             services.AddTransient<IUsuarioRepositoryAsync, UsuarioRepositoryAsync>();
+            
             //Matriculo el UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //Matriculo el servicio de EstadoProducto
