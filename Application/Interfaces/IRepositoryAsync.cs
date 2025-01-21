@@ -8,6 +8,7 @@ namespace Application.Interfaces
         Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken);
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool asNoTracking = false, CancellationToken cancellationToken = default);
         Task DesasociarAsync(T entity);
+        IQueryable<T> GetAllAsQueryable();
     }
     public interface IReadRepositoryAsync<T> : IReadRepositoryBase<T> where T : class{ }
 

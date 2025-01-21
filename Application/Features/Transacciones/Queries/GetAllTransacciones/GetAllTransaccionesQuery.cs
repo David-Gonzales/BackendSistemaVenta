@@ -29,7 +29,7 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
 
             public async Task<PagedResponse<List<TransaccionDto>>> Handle(GetAllTransaccionesQuery request, CancellationToken cancellationToken)
             {
-                int totalCount = await _repositoryTransaccionAsync.CountAsync(new TransaccionesSpecification(request.Parametros, request.TipoTransaccion));
+                int totalCount = await _repositoryTransaccionAsync.CountAsync(new TransaccionesSpecification(request.TipoTransaccion));
                 //Devuelve un listado de transacciones con la especificación que le pase
                 var transacciones = await _repositoryTransaccionAsync.ListAsync(new PagedTransaccionesSpecification(request.PageSize, request.PageNumber, request.Parametros, request.TipoTransaccion));
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class MiPrimeraMigracion : Migration
+    public partial class CreacionBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,7 +28,7 @@ namespace Persistence.Migrations
                     EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     Edad = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -46,14 +46,26 @@ namespace Persistence.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Icono = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IdMenuPadre = table.Column<int>(type: "int", nullable: true),
+                    MenuId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Menu", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Menu_Menu_IdMenuPadre",
+                        column: x => x.IdMenuPadre,
+                        principalTable: "Menu",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Menu_Menu_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menu",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -77,13 +89,12 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Capacidad = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Capacidad = table.Column<int>(type: "int", nullable: false),
                     Unidad = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    Stock = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
                     EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -100,13 +111,38 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rol", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EstadoProducto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    IdProducto = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EstadoProducto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EstadoProducto_Producto_IdProducto",
+                        column: x => x.IdProducto,
+                        principalTable: "Producto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -117,7 +153,7 @@ namespace Persistence.Migrations
                     IdMenu = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -150,9 +186,9 @@ namespace Persistence.Migrations
                     Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Clave = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    IdRol = table.Column<int>(type: "int", nullable: true),
+                    IdRol = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -173,14 +209,14 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoTransaccion = table.Column<int>(type: "int", nullable: false),
+                    TipoTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
                     TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdProducto = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -208,13 +244,12 @@ namespace Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumeroVenta = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
-                    TipoVenta = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
                     TipoPago = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -239,16 +274,19 @@ namespace Persistence.Migrations
                 name: "DetalleVenta",
                 columns: table => new
                 {
-                    IdVenta = table.Column<int>(type: "int", nullable: false),
-                    IdProducto = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Cantidad = table.Column<int>(type: "int", maxLength: 3, nullable: false),
                     TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoVenta = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrecioUnitario = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false)
+                    Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
+                    IdVenta = table.Column<int>(type: "int", nullable: false),
+                    IdProducto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DetalleVenta", x => new { x.IdVenta, x.IdProducto });
+                    table.PrimaryKey("PK_DetalleVenta", x => x.Id);
                     table.ForeignKey(
                         name: "FK_DetalleVenta_Producto_IdProducto",
                         column: x => x.IdProducto,
@@ -267,6 +305,26 @@ namespace Persistence.Migrations
                 name: "IX_DetalleVenta_IdProducto",
                 table: "DetalleVenta",
                 column: "IdProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalleVenta_IdVenta",
+                table: "DetalleVenta",
+                column: "IdVenta");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EstadoProducto_IdProducto",
+                table: "EstadoProducto",
+                column: "IdProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menu_IdMenuPadre",
+                table: "Menu",
+                column: "IdMenuPadre");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Menu_MenuId",
+                table: "Menu",
+                column: "MenuId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuRol_IdRol",
@@ -304,6 +362,9 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DetalleVenta");
+
+            migrationBuilder.DropTable(
+                name: "EstadoProducto");
 
             migrationBuilder.DropTable(
                 name: "MenuRol");

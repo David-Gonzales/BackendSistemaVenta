@@ -195,12 +195,18 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("IdMenuPadre")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("LastModify")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifyBy")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("MenuId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -213,6 +219,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdMenuPadre");
+
+                    b.HasIndex("MenuId");
 
                     b.ToTable("Menu", (string)null);
                 });
@@ -541,6 +551,20 @@ namespace Persistence.Migrations
                     b.Navigation("Producto");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Menu", b =>
+                {
+                    b.HasOne("Domain.Entities.Menu", "MenuPadre")
+                        .WithMany()
+                        .HasForeignKey("IdMenuPadre")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Domain.Entities.Menu", null)
+                        .WithMany("Submenus")
+                        .HasForeignKey("MenuId");
+
+                    b.Navigation("MenuPadre");
+                });
+
             modelBuilder.Entity("Domain.Entities.MenuRol", b =>
                 {
                     b.HasOne("Domain.Entities.Menu", "Menu")
@@ -617,6 +641,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Menu", b =>
                 {
                     b.Navigation("MenuRoles");
+
+                    b.Navigation("Submenus");
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>

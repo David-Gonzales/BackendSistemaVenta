@@ -12,7 +12,7 @@ namespace Application.Features.Roles.Queries.GetAllRoles
         public class GetAllRolesQueryHandler : IRequestHandler<GetAllRolesQuery, Response<List<RolDto>>>
         {
             private readonly IRepositoryAsync<Rol> _repositoryAsync;
-        private readonly IMapper _mapper;
+            private readonly IMapper _mapper;
         public GetAllRolesQueryHandler(IRepositoryAsync<Rol> repositoryAsync, IMapper mapper)
         {
             _repositoryAsync = repositoryAsync;

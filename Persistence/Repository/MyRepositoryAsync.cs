@@ -11,10 +11,12 @@ namespace Persistence.Repository
     public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T>, IReadRepositoryAsync<T> where T : class
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly DbSet<T> _dbSet;
 
         public MyRepositoryAsync(ApplicationDbContext dbContext) : base(dbContext)
         {
             this._dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public async Task<T> FirstOrDefaultAsync(CancellationToken cancellationToken)
@@ -38,6 +40,11 @@ namespace Persistence.Repository
         {
             _dbContext.Entry(entidad).State = EntityState.Detached;
             await Task.CompletedTask;
+        }
+
+        public IQueryable<T> GetAllAsQueryable()
+        {
+            return _dbSet.AsQueryable();
         }
 
         // Propiedad para acceder al DbContext y usar (por ejemplo) las extensiones de repositorio

@@ -1,5 +1,7 @@
 ﻿using Application.Features.Menus.Queries.GetAllMenus;
 using Application.Features.Menus.Queries.GetMenuById;
+using Application.Features.Menus.Queries.GetMenusPorUsuario;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers.v1
@@ -18,6 +20,13 @@ namespace WebAPI.Controllers.v1
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await Mediator.Send(new GetMenuByIdQuery { Id = id }));
+        }
+
+        //GET api/<controller>/id
+        [HttpGet("ListarMenusPorUsuario")]
+        public async Task<IActionResult> GetMenusPorUsuario(int idUsuario)
+        {
+            return Ok(await Mediator.Send( new GetMenusPorUsuarioQuery { IdUsuario = idUsuario }));
         }
     }
 }

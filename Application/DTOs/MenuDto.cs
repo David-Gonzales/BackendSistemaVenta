@@ -8,5 +8,6 @@ namespace Application.DTOs
         public string Nombre { get; set; }
         public string Icono { get; set; }
         public string Url { get; set; }
+        public List<MenuDto> Submenus { get; set; } = new List<MenuDto>();  // Inicializado como lista vacía
     }
 }

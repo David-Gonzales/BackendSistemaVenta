@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241115015015_CambioTipoTransaccionDeIntAString")]
-    partial class CambioTipoTransaccionDeIntAString
+    [Migration("20250121233253_CreacionBD")]
+    partial class CreacionBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,7 +48,7 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -100,14 +100,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.DetalleVenta", b =>
                 {
-                    b.Property<int>("IdVenta")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Cantidad")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<int>("IdProducto")
                         .HasColumnType("int");
 
-                    b.Property<int>("Cantidad")
-                        .HasMaxLength(3)
+                    b.Property<int>("IdVenta")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecioUnitario")
@@ -117,14 +123,59 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TipoVenta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(7,2)");
 
-                    b.HasKey("IdVenta", "IdProducto");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdProducto");
 
+                    b.HasIndex("IdVenta");
+
                     b.ToTable("DetalleVenta", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.EstadoProducto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModify")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifyBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoEstado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("EstadoProducto", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Menu", b =>
@@ -135,7 +186,7 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -147,12 +198,18 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("IdMenuPadre")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("LastModify")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifyBy")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("MenuId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -166,6 +223,10 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdMenuPadre");
+
+                    b.HasIndex("MenuId");
+
                     b.ToTable("Menu", (string)null);
                 });
 
@@ -177,7 +238,7 @@ namespace Persistence.Migrations
                     b.Property<int>("IdRol")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -232,7 +293,7 @@ namespace Persistence.Migrations
                     b.Property<int>("Capacidad")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -259,9 +320,6 @@ namespace Persistence.Migrations
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(7,2)");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("int");
-
                     b.Property<string>("Unidad")
                         .IsRequired()
                         .HasMaxLength(3)
@@ -280,7 +338,7 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -315,7 +373,7 @@ namespace Persistence.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -378,7 +436,7 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -390,7 +448,7 @@ namespace Persistence.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
-                    b.Property<int?>("IdRol")
+                    b.Property<int>("IdRol")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastModify")
@@ -425,7 +483,7 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("Created")
+                    b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -453,11 +511,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("TipoVenta")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(7,2)");
@@ -488,6 +541,31 @@ namespace Persistence.Migrations
                     b.Navigation("Producto");
 
                     b.Navigation("Venta");
+                });
+
+            modelBuilder.Entity("Domain.Entities.EstadoProducto", b =>
+                {
+                    b.HasOne("Domain.Entities.Producto", "Producto")
+                        .WithMany("Estados")
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Menu", b =>
+                {
+                    b.HasOne("Domain.Entities.Menu", "MenuPadre")
+                        .WithMany()
+                        .HasForeignKey("IdMenuPadre")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Domain.Entities.Menu", null)
+                        .WithMany("Submenus")
+                        .HasForeignKey("MenuId");
+
+                    b.Navigation("MenuPadre");
                 });
 
             modelBuilder.Entity("Domain.Entities.MenuRol", b =>
@@ -533,7 +611,8 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Rol", "Rol")
                         .WithMany("Usuarios")
                         .HasForeignKey("IdRol")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Rol");
                 });
@@ -565,11 +644,15 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Menu", b =>
                 {
                     b.Navigation("MenuRoles");
+
+                    b.Navigation("Submenus");
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.Navigation("DetalleVentas");
+
+                    b.Navigation("Estados");
 
                     b.Navigation("Transacciones");
                 });

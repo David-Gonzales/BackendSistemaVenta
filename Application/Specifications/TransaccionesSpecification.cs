@@ -6,21 +6,10 @@ namespace Application.Specifications
 {
     public class TransaccionesSpecification : Specification<Transaccion>
     {
-        public TransaccionesSpecification(string? parametros, string tipoTransaccion)
+        public TransaccionesSpecification(string tipoTransaccion)
         {
             Query.Include(p => p.Producto)
                 .Include(u => u.Usuario);
-
-            if (!string.IsNullOrEmpty(parametros))
-            {
-                Query.Where(x =>
-                    EF.Functions.Like(x.Usuario.Nombres, $"%{parametros}") ||
-                    EF.Functions.Like(x.Usuario.Apellidos, $"%{parametros}%") ||
-                    EF.Functions.Like(x.Producto.Nombre, $"%{parametros}%") ||
-                    EF.Functions.Like(x.Producto.Unidad, $"%{parametros}%") ||
-                    EF.Functions.Like(x.TipoEstado.ToString(), $"%{parametros}%")
-                );
-            }
 
             if (!string.IsNullOrEmpty(tipoTransaccion))
             {
