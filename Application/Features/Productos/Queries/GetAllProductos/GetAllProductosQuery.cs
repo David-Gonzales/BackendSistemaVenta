@@ -24,6 +24,9 @@ namespace Application.Features.Productos.Queries.GetAllProductos
 
             public async Task<PagedResponse<List<ProductoDto>>> Handle(GetAllProductosQuery request, CancellationToken cancellationToken)
             {
+                // Cuenta total de registros antes de aplicar paginación
+                int totalCount = await _repositoryAsync.CountAsync(new ProductosSpecification(request.Parametros));
+
                 //Devuelve un listado de clientes con la especificación que le pase
                 var productos = await _repositoryAsync.ListAsync(new PagedProductosSpecification(request.PageSize, request.PageNumber, request.Parametros));
 
@@ -38,7 +41,7 @@ namespace Application.Features.Productos.Queries.GetAllProductos
                     StockGeneral = p.Estados?.Sum(e => e.Stock) ?? 0 // Calcular el stock total sumando los valores de stock de los estados y si Estados es null, usar 0 como valor por defecto
                 }).ToList();
 
-                return new PagedResponse<List<ProductoDto>>(productosDto, request.PageNumber, request.PageSize);
+                return new PagedResponse<List<ProductoDto>>(productosDto, request.PageNumber, request.PageSize, totalCount);
             }
         }
     }

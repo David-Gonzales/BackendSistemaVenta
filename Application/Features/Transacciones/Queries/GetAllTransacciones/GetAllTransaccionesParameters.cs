@@ -5,5 +5,6 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
     public class GetAllTransaccionesParameters : RequestParameter
     {
         public string? Parametros { get; set; }
+        public string? TipoTransaccion { get; set; }
     }
 }

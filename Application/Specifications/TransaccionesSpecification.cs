@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Specifications
 {
-    public class PagedTransaccionesSpecification : Specification<Transaccion>
+    public class TransaccionesSpecification : Specification<Transaccion>
     {
-        public PagedTransaccionesSpecification(int pageSize, int pageNumber, string? parametros, string tipoTransaccion)
+        public TransaccionesSpecification(string? parametros, string tipoTransaccion)
         {
             Query.Include(p => p.Producto)
-                .Include(u => u.Usuario)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+                .Include(u => u.Usuario);
 
             if (!string.IsNullOrEmpty(parametros))
             {

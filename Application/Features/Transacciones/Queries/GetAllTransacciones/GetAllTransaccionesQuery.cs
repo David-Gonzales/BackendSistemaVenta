@@ -12,6 +12,7 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public string? Parametros { get; set; }
+        public string? TipoTransaccion { get; set; }
 
         public class GetAllTransaccionesQueryHandler : IRequestHandler<GetAllTransaccionesQuery, PagedResponse<List<TransaccionDto>>>
         {
@@ -28,8 +29,9 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
 
             public async Task<PagedResponse<List<TransaccionDto>>> Handle(GetAllTransaccionesQuery request, CancellationToken cancellationToken)
             {
+                int totalCount = await _repositoryTransaccionAsync.CountAsync(new TransaccionesSpecification(request.Parametros, request.TipoTransaccion));
                 //Devuelve un listado de transacciones con la especificación que le pase
-                var transacciones = await _repositoryTransaccionAsync.ListAsync(new PagedTransaccionesSpecification(request.PageSize, request.PageNumber, request.Parametros));
+                var transacciones = await _repositoryTransaccionAsync.ListAsync(new PagedTransaccionesSpecification(request.PageSize, request.PageNumber, request.Parametros, request.TipoTransaccion));
 
                 var productos = await _repositoryProductoAsync.ListAsync();
                 var usuarios = await _repositoryUsuarioAsync.ListAsync();
@@ -57,7 +59,7 @@ namespace Application.Features.Transacciones.Queries.GetAllTransacciones
                         ApellidosUsuario = U.Apellidos
 
                     };
-                return new PagedResponse<List<TransaccionDto>>(resultado.ToList(), request.PageNumber, request.PageSize);
+                return new PagedResponse<List<TransaccionDto>>(resultado.ToList(), request.PageNumber, request.PageSize, totalCount);
             }
         }
     }

@@ -14,12 +14,16 @@ namespace WebAPI.Controllers.v1
         [HttpGet("Listar")]
         public async Task<IActionResult> Get([FromQuery] GetAllTransaccionesParameters filter)
         {
-            return Ok(await Mediator.Send(new GetAllTransaccionesQuery
+            var query = new GetAllTransaccionesQuery 
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                Parametros = filter.Parametros
-            }));
+                Parametros = filter.Parametros,
+                TipoTransaccion = filter.TipoTransaccion
+            };
+
+            var result = await Mediator.Send(query);
+            return Ok(result);
         }
 
         //GET api/<controller>/id

@@ -32,6 +32,8 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
 
             public async Task<PagedResponse<List<HistorialVentaDto>>> Handle(GetAllVentasQuery request, CancellationToken cancellationToken)
             {
+                int totalCount = await _repositoryVentaAsync.CountAsync(new VentasSpecification());
+
                 var ventas = await _repositoryVentaAsync.ListAsync(new PagedVentasSpecification(request.PageSize, request.PageNumber, request.BuscarPor, request.NumeroVenta, request.FechaInicio, request.FechaFin));
 
                 var clientes = await _repositoryClienteAsync.ListAsync();
@@ -68,7 +70,7 @@ namespace Application.Features.Ventas.Queries.GetAllVentas
                     }).ToList()
                 }).ToList();
 
-                return new PagedResponse<List<HistorialVentaDto>>(resultado, request.PageNumber, request.PageSize);
+                return new PagedResponse<List<HistorialVentaDto>>(resultado, request.PageNumber, request.PageSize, totalCount);
             }
         }
     }

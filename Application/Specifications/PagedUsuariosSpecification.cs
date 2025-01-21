@@ -6,7 +6,7 @@ namespace Application.Specifications
 {
     public class PagedUsuariosSpecification : Specification<Usuario>
     {
-        public PagedUsuariosSpecification(int pageSize, int pageNumber, string parametros)
+        public PagedUsuariosSpecification(int pageSize, int pageNumber, string? parametros)
         {
             Query.Include(r => r.Rol).Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);

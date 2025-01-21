@@ -26,11 +26,12 @@ namespace Application.Features.Clientes.Queries.GetAllClientes
 
             public async Task<PagedResponse<List<ClienteDto>>> Handle(GetAllClientesQuery request, CancellationToken cancellationToken)
             {
+                int totalCount = await _repositoryAsync.CountAsync(new ClientesSpecification(request.Parametros));
                 //Devuelve un listado de clientes con la especificación que le pase
                 var clientes = await _repositoryAsync.ListAsync(new PagedClientesSpecification(request.PageSize, request.PageNumber, request.Parametros));
                 var clientesDto = _mapper.Map<List<ClienteDto>>(clientes);
 
-                return new PagedResponse<List<ClienteDto>>(clientesDto, request.PageNumber, request.PageSize);
+                return new PagedResponse<List<ClienteDto>>(clientesDto, request.PageNumber, request.PageSize, totalCount);
             }
         }
     }

@@ -9,6 +9,7 @@ namespace Application.Features.Productos.Queries.GetProductosEstados
 {
     public class GetProductosEstadosQuery : IRequest<Response<List<ProductoConEstadoDto>>>
     {
+        public string? Parametros { get; set; }
         public class GetProductosEstadosQueryHandler : IRequestHandler<GetProductosEstadosQuery, Response<List<ProductoConEstadoDto>>>
         {
             private readonly IReadRepositoryAsync<Producto> _repositoryProductoAsync;
@@ -20,7 +21,7 @@ namespace Application.Features.Productos.Queries.GetProductosEstados
 
             public async Task<Response<List<ProductoConEstadoDto>>> Handle(GetProductosEstadosQuery request, CancellationToken cancellationToken)
             {
-                var productos = await _repositoryProductoAsync.ListAsync(new ProductosSpecification(), cancellationToken);
+                var productos = await _repositoryProductoAsync.ListAsync(new ProductosSpecification(request.Parametros), cancellationToken);
 
                 if (productos == null || !productos.Any())
                 {

@@ -6,7 +6,7 @@ namespace Application.Specifications
 {
     public  class PagedProductosSpecification : Specification<Producto>
     {
-        public PagedProductosSpecification(int pageSize, int pageNumber, string parametros)
+        public PagedProductosSpecification(int pageSize, int pageNumber, string? parametros)
         {
             Query.Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);

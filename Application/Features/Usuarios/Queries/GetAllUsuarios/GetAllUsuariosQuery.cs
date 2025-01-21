@@ -26,6 +26,8 @@ namespace Application.Features.Usuarios.Queries.GetAllUsuarios
 
             public async Task<PagedResponse<List<UsuarioDto>>> Handle(GetAllUsuariosQuery request, CancellationToken cancellationToken)
             {
+                int totalCount = await _repositoryUsuarioAsync.CountAsync(new UsuariosSpecification(request.Parametros));
+
                 var usuarios = await _repositoryUsuarioAsync.ListAsync(new PagedUsuariosSpecification(request.PageSize, request.PageNumber, request.Parametros));
 
                 var roles = await _repositoryRolAsync.ListAsync();
@@ -47,7 +49,7 @@ namespace Application.Features.Usuarios.Queries.GetAllUsuarios
                         NombreRol = R.Nombre
                     };
                 
-                return new PagedResponse<List<UsuarioDto>>(resultado.ToList(), request.PageNumber, request.PageSize);
+                return new PagedResponse<List<UsuarioDto>>(resultado.ToList(), request.PageNumber, request.PageSize, totalCount);
             }
         }
     }
