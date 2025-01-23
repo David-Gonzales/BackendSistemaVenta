@@ -3,16 +3,16 @@ using Domain.Entities;
 
 namespace Application.Specifications
 {
-    public class MenuSpecification :Specification<Menu>
+    public class MenusPorUsuarioSpecification : Specification<Menu>
     {
-        public MenuSpecification(List<int> menuIds)
+        public MenusPorUsuarioSpecification(int idUsuario)
         {
-            // Filtrar los menús que tengan un Id que esté en la lista menuIds
-            Query.Where(m => menuIds.Contains(m.Id));
+            // Filtrar los menús basados en el rol del usuario
+            Query.Where(m => m.MenuRoles
+                .Any(mr => mr.Rol.Id == idUsuario));
 
-            // Incluir los submenús (los menús con IdMenuPadre == Id del menú principal)
-            Query.Include(m => m.Submenus)
-                 .Where(m => m.IdMenuPadre == null);  // Solo menús principales
+            // Incluir submenús
+            Query.Include(m => m.Submenus);  // Asegúrate de incluir los submenús
         }
     }
 }

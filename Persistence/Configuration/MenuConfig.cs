@@ -31,10 +31,10 @@ namespace Persistence.Configuration
             builder.Property(p => p.LastModifyBy)
             .HasMaxLength(50);
 
-            builder.HasOne(m => m.MenuPadre)
-                .WithMany()
-                .HasForeignKey(m => m.IdMenuPadre)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(m => m.MenuPadre)
+            //    .WithMany()
+            //    .HasForeignKey(m => m.IdMenuPadre)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             //MenuRol (1 - N)
             builder.HasMany(m => m.MenuRoles)

@@ -60,7 +60,8 @@ namespace Application.Mappings
 
             #region DTOs
             CreateMap<Cliente, ClienteDto>();
-            CreateMap<Menu, MenuDto>();
+            CreateMap<Menu, MenuDto>()
+            .ForMember(dest => dest.Submenus, opt => opt.MapFrom(src => src.Submenus));
             CreateMap<Producto, ProductoDto>();//ya no es útil
             CreateMap<EstadoProducto, EstadoProductoDto>();
             CreateMap<Rol, RolDto>();

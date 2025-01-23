@@ -5,6 +5,7 @@ using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Menus.Queries.GetMenusPorUsuario
 {
@@ -18,46 +19,60 @@ namespace Application.Features.Menus.Queries.GetMenusPorUsuario
             private readonly IRepositoryAsync<MenuRol> _repositoryMenuRolAsync;
             private readonly IMapper _mapper;
 
-            public GetRolesPorUsuarioQueryHandler(IRepositoryAsync<Menu> repositoryMenuAsync, IMapper mapper, IRepositoryAsync<MenuRol> repositoryMenuRolAsync, IRepositoryAsync<Usuario> repositoryUsuarioAsync)
+            public GetRolesPorUsuarioQueryHandler(IRepositoryAsync<Menu> repositoryMenuAsync, IMapper mapper, IRepositoryAsync<Usuario> repositoryUsuarioAsync, IRepositoryAsync<MenuRol> repositoryMenuRolAsync)
             {
                 _repositoryMenuAsync = repositoryMenuAsync;
                 _mapper = mapper;
-                _repositoryMenuRolAsync = repositoryMenuRolAsync;
                 _repositoryUsuarioAsync = repositoryUsuarioAsync;
+                _repositoryMenuRolAsync = repositoryMenuRolAsync;
             }
 
             public async Task<Response<List<MenuDto>>> Handle(GetMenusPorUsuarioQuery request, CancellationToken cancellationToken)
             {
-                var usuario = await _repositoryUsuarioAsync.GetByIdAsync(request.IdUsuario, cancellationToken);
+                var usuario = await _repositoryUsuarioAsync.FirstOrDefaultAsync(u => u.Id == request.IdUsuario, cancellationToken: cancellationToken);
 
                 if (usuario == null)
                 {
-                    return new Response<List<MenuDto>>("Usuario no encontrado.");
+                    return new Response<List<MenuDto>>("Usuario no encontrado");
                 }
 
-                // 2. Si el usuario no tiene rol, no se deben devolver menús
-                if (usuario.IdRol == null || usuario.IdRol == 0)
+                // Obtenemos los roles de usuario y las relaciones con los menús
+                var menuRoles = await _repositoryMenuRolAsync
+                    .GetAllAsQueryable()
+                    .Include(m => m.Menu)
+                    .Where(mr => mr.IdRol == usuario.IdRol)  // Filtramos por el rol del usuario
+                    .ToListAsync(cancellationToken);
+
+                if (!menuRoles.Any())
                 {
-                    return new Response<List<MenuDto>>(new List<MenuDto>());
+                    return new Response<List<MenuDto>>("No se encontraron menús para el rol del usuario.");
                 }
 
-                // 3. Obtener los IdMenu asociados al Rol del usuario
-                var menuRoles = await _repositoryMenuRolAsync.ListAsync(cancellationToken);
-                var menuRolesFiltrados = menuRoles.Where(mr => mr.IdRol == usuario.IdRol).ToList();
+                // Filtramos los menús para obtener solo los que no tienen menú padre (menús principales)
+                var menus = menuRoles
+                            .Select(mr => mr.Menu)
+                            .Where(menu => menu != null && menu.IdMenuPadre.HasValue && menu.IdMenuPadre.Value == 0)  // Menús principales
+                            .ToList();
 
-                if (!menuRolesFiltrados.Any())
+                if (!menus.Any())
                 {
-                    return new Response<List<MenuDto>>(new List<MenuDto>());
+                    return new Response<List<MenuDto>>("No se encontraron menús principales.");
                 }
 
-                // 4. Obtener los menús correspondientes
-                var menuIds = menuRolesFiltrados.Select(mr => mr.IdMenu).ToList();
-                var menuSpecification = new MenuSpecification(menuIds);
+                // Cargar submenús
+                foreach (var menu in menus)
+                {
+                    menu.Submenus = new List<Menu>();
 
-                // Obtener los menús principales junto con sus submenús
-                var menus = await _repositoryMenuAsync.ListAsync(menuSpecification, cancellationToken);
+                    var submenus = await _repositoryMenuAsync
+                        .GetAllAsQueryable()
+                        .Where(m => m.IdMenuPadre == menu.Id)  // Submenús del menú actual
+                        .ToListAsync(cancellationToken);
 
-                // 5. Mapear los menús a DTOs
+                    menu.Submenus.AddRange(submenus);
+                }
+
+                // Mapear los menús a DTOs
                 var menuDtos = _mapper.Map<List<MenuDto>>(menus);
 
                 return new Response<List<MenuDto>>(menuDtos);

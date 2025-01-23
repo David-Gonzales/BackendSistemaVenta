@@ -8,7 +8,7 @@ namespace Domain.Entities
         public required string Icono { get; set; }
         public required string Url { get; set; }
         public int? IdMenuPadre { get; set; } // Esto es opcional, solo para submenús
-        public Menu? MenuPadre { get; set; } // Relación hacia el menú padre
+        //public Menu? MenuPadre { get; set; } // Relación hacia el menú padre
         public List<Menu> Submenus { get; set; } = new List<Menu>(); // Relación hacia los submenús
 
         //Relación - Lista de Roles con este Menu
