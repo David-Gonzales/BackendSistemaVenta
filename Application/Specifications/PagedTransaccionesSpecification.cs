@@ -10,6 +10,7 @@ namespace Application.Specifications
         {
             Query.Include(p => p.Producto)
                 .Include(u => u.Usuario)
+                .OrderByDescending(x => x.Fecha)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
 
