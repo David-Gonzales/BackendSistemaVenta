@@ -9,7 +9,9 @@ namespace Domain.Entities
         public required int Cantidad { get; set; }
         public TipoEstado TipoEstado { get; set; }//Lleno o vacío
 
-        //Entity Framework infiere la relación automáticamente, siempre que se declare tanto la propiedad de navegación (Producto, Usuario) como la clave foránea (IdProducto, IdUsuario)
+        //Entity Framework infiere la relación automáticamente, 
+		//siempre que se declare tanto la propiedad de navegación 
+		//(Producto, Usuario) como la clave foránea (IdProducto, IdUsuario)
         //FK Producto
         public int IdProducto { get; set; }
         public Producto? Producto { get; set; } //propiedad de navegación
