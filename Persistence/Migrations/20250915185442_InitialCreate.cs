@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,133 +7,160 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreacionBD : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Cliente",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombres = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Apellidos = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    TipoDocumento = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    NumeroDocumento = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Ciudad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombres = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Apellidos = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TipoDocumento = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NumeroDocumento = table.Column<string>(type: "varchar(12)", maxLength: 12, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Correo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Ciudad = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Telefono = table.Column<string>(type: "varchar(9)", maxLength: 9, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FechaNacimiento = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    EsActivo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
                     Edad = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cliente", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Menu",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Icono = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Icono = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Url = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IdMenuPadre = table.Column<int>(type: "int", nullable: true),
                     MenuId = table.Column<int>(type: "int", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Menu", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Menu_Menu_IdMenuPadre",
-                        column: x => x.IdMenuPadre,
-                        principalTable: "Menu",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Menu_Menu_MenuId",
                         column: x => x.MenuId,
                         principalTable: "Menu",
                         principalColumn: "Id");
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "NumeroVenta",
                 columns: table => new
                 {
                     IdNumeroVenta = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UltimoNumero = table.Column<int>(type: "int", maxLength: 5, nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    FechaRegistro = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NumeroVenta", x => x.IdNumeroVenta);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Producto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Capacidad = table.Column<int>(type: "int", nullable: false),
-                    Unidad = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Unidad = table.Column<string>(type: "varchar(3)", maxLength: 3, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Precio = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
-                    EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    EsActivo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Producto", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Rol",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rol", x => x.Id);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "EstadoProducto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TipoEstado = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Stock = table.Column<int>(type: "int", nullable: false),
                     IdProducto = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,7 +171,8 @@ namespace Persistence.Migrations
                         principalTable: "Producto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "MenuRol",
@@ -152,10 +181,12 @@ namespace Persistence.Migrations
                     IdRol = table.Column<int>(type: "int", nullable: false),
                     IdMenu = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -172,25 +203,33 @@ namespace Persistence.Migrations
                         principalTable: "Rol",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombres = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Apellidos = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Clave = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EsActivo = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nombres = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Apellidos = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Telefono = table.Column<string>(type: "varchar(9)", maxLength: 9, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Correo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Clave = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EsActivo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
                     IdRol = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,24 +240,29 @@ namespace Persistence.Migrations
                         principalTable: "Rol",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Transaccion",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoTransaccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TipoTransaccion = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fecha = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoEstado = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     IdProducto = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,23 +279,28 @@ namespace Persistence.Migrations
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Venta",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumeroVenta = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
-                    TipoPago = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NumeroVenta = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TipoPago = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdUsuario = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    LastModify = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    CreatedBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastModifyBy = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastModify = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,17 +317,20 @@ namespace Persistence.Migrations
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "DetalleVenta",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Cantidad = table.Column<int>(type: "int", maxLength: 3, nullable: false),
-                    TipoEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TipoVenta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoEstado = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TipoVenta = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     PrecioUnitario = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(7,2)", nullable: false),
                     IdVenta = table.Column<int>(type: "int", nullable: false),
@@ -299,7 +351,8 @@ namespace Persistence.Migrations
                         principalTable: "Venta",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetalleVenta_IdProducto",
@@ -315,11 +368,6 @@ namespace Persistence.Migrations
                 name: "IX_EstadoProducto_IdProducto",
                 table: "EstadoProducto",
                 column: "IdProducto");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Menu_IdMenuPadre",
-                table: "Menu",
-                column: "IdMenuPadre");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menu_MenuId",

@@ -15,25 +15,13 @@ namespace Persistence
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            if (connectionString.Contains("Uid=") || connectionString.Contains("User Id=")) // Detecta MySQL
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseMySql(
-                        connectionString,
-                        ServerVersion.AutoDetect(connectionString),
-                        b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
-                    )
-                );
-            }
-            else // Por defecto SQL Server
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(
-                        connectionString,
-                        b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
-                    )
-                );
-            }
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySql(
+                    connectionString,
+                    ServerVersion.AutoDetect(connectionString),
+                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
+                )
+            );
 
             #region Repositorios
             //Matriculamos el patrón repositorio
