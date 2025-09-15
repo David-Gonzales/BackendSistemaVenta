@@ -1,6 +1,8 @@
 using Application;
-using Shared;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Persistence.Contexts;
+using Shared;
 using WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +24,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("NuevaPolitica", app =>
     {
-        app.AllowAnyOrigin()
+        app.WithOrigins("https://grupo-horeb.vercel.app")
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
@@ -48,4 +50,9 @@ app.UseCors("NuevaPolitica");
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
 app.Run();
